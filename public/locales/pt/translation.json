@@ -1,0 +1,107 @@
+{
+  "auth": {
+    "useAuthActions": {
+      "loginError": "Ocorreu um erro ao fazer login. Por favor, tente novamente.",
+      "loginSuccess": "Você fez login com sucesso.",
+      "logoutError": "Ocorreu um erro ao sair. Por favor, tente novamente."
+    },
+    "LoginForm": {
+      "title": "Sistema de Gestão de Informação Logística",
+      "subtitle": "Entre na sua conta.",
+      "usernameLabel": "Nome de usuário",
+      "passwordLabel": "Senha",
+      "forgotPassword": "Esqueceu sua senha?",
+      "loginButton": "Entrar",
+      "loginButtonLoading": "Entrando...",
+      "preferences": "Preferências",
+      "language": "Idioma",
+      "poweredBy": "O software é desenvolvido por",
+      "appName": "OpenLMIS",
+      "usernameRequired": "Nome de usuário é obrigatório",
+      "maxLengthExceeded": "Número máximo de {max} caracteres excedido",
+      "passwordRequired": "Senha é obrigatória",
+      "usernamePlaceholder": "Digite seu nome de usuário",
+      "passwordPlaceholder": "Digite sua senha"
+    }
+  },
+  "app": {
+    "ProtectedLayout": {
+      "notifications": "Notificações",
+      "logout": "Sair"
+    },
+    "AppSidebar": {
+      "menu": "Menu"
+    },
+    "AppWidget": {
+      "poc": "Prova de Conceito"
+    },
+    "UserWidget": {
+      "roles": "Funções",
+      "settings": "Configurações",
+      "preferences": "Preferências",
+      "theme": "Tema",
+      "language": "Idioma",
+      "logout": "Sair"
+    },
+    "MainRoutes": {
+      "home": "Início"
+    },
+    "MenuRoutes": {
+      "administration": "Administração",
+      "home": "Início",
+      "users": "Usuários"
+    },
+    "NotificationButton": {
+      "notifications": "Notificações",
+      "openNotifications": "Abrir notificações",
+      "markAllAsRead": "Marcar todas como lidas",
+      "unread": "Não lida"
+    },
+    "HomePage": {
+      "systemName": "Sistema de Informação de Gestão Logística",
+      "explanation": "Aqui está uma visão geral do sistema."
+    },
+    "Users": {
+      "username": "Nome de usuário",
+      "firstName": "Primeiro Nome",
+      "lastName": "Último Nome",
+      "email": "E-mail",
+      "status": "Status",
+      "active": "Ativo",
+      "inactive": "Inativo",
+      "actions": "Ações",
+      "select": "Selecionar",
+      "selectAll": "Selecionar todos",
+      "selectRow": "Selecionar usuário {{name}}",
+      "editUser": "Editar usuário",
+      "managePermissions": "Gerenciar permissões",
+      "resetPassword": "Redefinir senha",
+      "searchByUsername": "Buscar por nome de usuário",
+      "clearFilter": "Limpar filtro",
+      "delete": "Excluir",
+      "deleteConfirmTitle": "Você tem certeza?",
+      "deleteConfirmDescription": "Esta ação não pode ser desfeita. Isso excluirá permanentemente {{count}} {{rows}} selecionados.",
+      "row": "linha",
+      "rows": "linhas",
+      "cancel": "Cancelar",
+      "columns": "Mostrar / Ocultar Colunas",
+      "addUser": "Adicionar Usuário",
+      "pagination": "Página {{current}} de {{total}}",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "previousPage": "Ir para a página anterior",
+      "nextPage": "Ir para a próxima página",
+      "noResults": "Sem resultados.",
+      "sortBy": "Ordenar por {{column}}",
+      "home": "Início",
+      "administration": "Administração",
+      "users": "Usuário",
+      "loading": "Carregando Usuários..."
+    },
+    "NotFoundPage": {
+      "title": "Página não encontrada",
+      "description": "A página que você está procurando não existe.",
+      "back": "Voltar"
+    }
+  }
+}

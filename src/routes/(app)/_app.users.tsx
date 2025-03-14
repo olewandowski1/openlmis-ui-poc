@@ -1,0 +1,30 @@
+import { Separator } from '@/components/ui/separator';
+import { Typography } from '@/components/ui/typography';
+import { UsersBreadcrumb } from '@/features/users/components/users-breadcrumb';
+import { UsersTable } from '@/features/users/components/users-table';
+import { createFileRoute } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
+
+export const Route = createFileRoute('/(app)/_app/users')({
+  component: UsersPage,
+});
+
+/**
+ * @name UsersPage
+ * @description
+ * Users page for the app. It is the page that the user sees after clicking on the Users link.
+ */
+function UsersPage() {
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'app.Users',
+  });
+
+  return (
+    <div className='flex flex-col gap-4 p-2 md:p-4'>
+      <UsersBreadcrumb />
+      <Typography.H1> {t('users')} </Typography.H1>
+      <Separator />
+      <UsersTable />
+    </div>
+  );
+}
