@@ -1,11 +1,11 @@
 import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
-import { UsersBreadcrumb } from '@/features/users/components/users-breadcrumb';
 import { UsersTable } from '@/features/users/components/users-table';
 import { createFileRoute } from '@tanstack/react-router';
+import { UsersRound } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-export const Route = createFileRoute('/(app)/_app/users')({
+export const Route = createFileRoute('/(app)/_app/users/')({
   component: UsersPage,
 });
 
@@ -20,11 +20,19 @@ function UsersPage() {
   });
 
   return (
-    <div className='flex flex-col gap-4 p-2 md:p-4'>
-      <UsersBreadcrumb />
-      <Typography.H1> {t('users')} </Typography.H1>
+    <>
+      <div className='p-2 md:py-2 md:p-4 flex flex-row items-center justify-start gap-2'>
+        <div className='size-7 flex justify-center items-center rounded-md bg-gradient-to-br from-accent/60 to-accent'>
+          <UsersRound size={16} />
+        </div>
+        <Typography.H1 className='text-xl font-bold'>
+          {t('users')}
+        </Typography.H1>
+      </div>
       <Separator />
-      <UsersTable />
-    </div>
+      <div className='flex flex-col gap-4 p-2 md:p-4'>
+        <UsersTable />
+      </div>
+    </>
   );
 }

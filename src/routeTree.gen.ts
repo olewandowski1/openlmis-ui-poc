@@ -16,8 +16,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as authLoginImport } from './routes/(auth)/login'
 import { Route as appAppImport } from './routes/(app)/_app'
-import { Route as appAppUsersImport } from './routes/(app)/_app.users'
 import { Route as appAppHomeImport } from './routes/(app)/_app.home'
+import { Route as appAppUsersIndexImport } from './routes/(app)/_app.users.index'
+import { Route as appAppUsersCreateImport } from './routes/(app)/_app.users.create'
+import { Route as appAppUsersUserIdEditImport } from './routes/(app)/_app.users.$userId.edit'
 
 // Create Virtual Routes
 
@@ -47,15 +49,27 @@ const appAppRoute = appAppImport.update({
   getParentRoute: () => appRoute,
 } as any)
 
-const appAppUsersRoute = appAppUsersImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => appAppRoute,
-} as any)
-
 const appAppHomeRoute = appAppHomeImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => appAppRoute,
+} as any)
+
+const appAppUsersIndexRoute = appAppUsersIndexImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => appAppRoute,
+} as any)
+
+const appAppUsersCreateRoute = appAppUsersCreateImport.update({
+  id: '/users/create',
+  path: '/users/create',
+  getParentRoute: () => appAppRoute,
+} as any)
+
+const appAppUsersUserIdEditRoute = appAppUsersUserIdEditImport.update({
+  id: '/users/$userId/edit',
+  path: '/users/$userId/edit',
   getParentRoute: () => appAppRoute,
 } as any)
 
@@ -98,11 +112,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAppHomeImport
       parentRoute: typeof appAppImport
     }
-    '/(app)/_app/users': {
-      id: '/(app)/_app/users'
+    '/(app)/_app/users/create': {
+      id: '/(app)/_app/users/create'
+      path: '/users/create'
+      fullPath: '/users/create'
+      preLoaderRoute: typeof appAppUsersCreateImport
+      parentRoute: typeof appAppImport
+    }
+    '/(app)/_app/users/': {
+      id: '/(app)/_app/users/'
       path: '/users'
       fullPath: '/users'
-      preLoaderRoute: typeof appAppUsersImport
+      preLoaderRoute: typeof appAppUsersIndexImport
+      parentRoute: typeof appAppImport
+    }
+    '/(app)/_app/users/$userId/edit': {
+      id: '/(app)/_app/users/$userId/edit'
+      path: '/users/$userId/edit'
+      fullPath: '/users/$userId/edit'
+      preLoaderRoute: typeof appAppUsersUserIdEditImport
       parentRoute: typeof appAppImport
     }
   }
@@ -112,12 +140,16 @@ declare module '@tanstack/react-router' {
 
 interface appAppRouteChildren {
   appAppHomeRoute: typeof appAppHomeRoute
-  appAppUsersRoute: typeof appAppUsersRoute
+  appAppUsersCreateRoute: typeof appAppUsersCreateRoute
+  appAppUsersIndexRoute: typeof appAppUsersIndexRoute
+  appAppUsersUserIdEditRoute: typeof appAppUsersUserIdEditRoute
 }
 
 const appAppRouteChildren: appAppRouteChildren = {
   appAppHomeRoute: appAppHomeRoute,
-  appAppUsersRoute: appAppUsersRoute,
+  appAppUsersCreateRoute: appAppUsersCreateRoute,
+  appAppUsersIndexRoute: appAppUsersIndexRoute,
+  appAppUsersUserIdEditRoute: appAppUsersUserIdEditRoute,
 }
 
 const appAppRouteWithChildren =
@@ -137,14 +169,18 @@ export interface FileRoutesByFullPath {
   '/': typeof appAppRouteWithChildren
   '/login': typeof authLoginRoute
   '/home': typeof appAppHomeRoute
-  '/users': typeof appAppUsersRoute
+  '/users/create': typeof appAppUsersCreateRoute
+  '/users': typeof appAppUsersIndexRoute
+  '/users/$userId/edit': typeof appAppUsersUserIdEditRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof appAppRouteWithChildren
   '/login': typeof authLoginRoute
   '/home': typeof appAppHomeRoute
-  '/users': typeof appAppUsersRoute
+  '/users/create': typeof appAppUsersCreateRoute
+  '/users': typeof appAppUsersIndexRoute
+  '/users/$userId/edit': typeof appAppUsersUserIdEditRoute
 }
 
 export interface FileRoutesById {
@@ -154,14 +190,28 @@ export interface FileRoutesById {
   '/(app)/_app': typeof appAppRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
   '/(app)/_app/home': typeof appAppHomeRoute
-  '/(app)/_app/users': typeof appAppUsersRoute
+  '/(app)/_app/users/create': typeof appAppUsersCreateRoute
+  '/(app)/_app/users/': typeof appAppUsersIndexRoute
+  '/(app)/_app/users/$userId/edit': typeof appAppUsersUserIdEditRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/home' | '/users'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/home'
+    | '/users/create'
+    | '/users'
+    | '/users/$userId/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/home' | '/users'
+  to:
+    | '/'
+    | '/login'
+    | '/home'
+    | '/users/create'
+    | '/users'
+    | '/users/$userId/edit'
   id:
     | '__root__'
     | '/'
@@ -169,7 +219,9 @@ export interface FileRouteTypes {
     | '/(app)/_app'
     | '/(auth)/login'
     | '/(app)/_app/home'
-    | '/(app)/_app/users'
+    | '/(app)/_app/users/create'
+    | '/(app)/_app/users/'
+    | '/(app)/_app/users/$userId/edit'
   fileRoutesById: FileRoutesById
 }
 
@@ -214,7 +266,9 @@ export const routeTree = rootRoute
       "parent": "/(app)",
       "children": [
         "/(app)/_app/home",
-        "/(app)/_app/users"
+        "/(app)/_app/users/create",
+        "/(app)/_app/users/",
+        "/(app)/_app/users/$userId/edit"
       ]
     },
     "/(auth)/login": {
@@ -224,8 +278,16 @@ export const routeTree = rootRoute
       "filePath": "(app)/_app.home.tsx",
       "parent": "/(app)/_app"
     },
-    "/(app)/_app/users": {
-      "filePath": "(app)/_app.users.tsx",
+    "/(app)/_app/users/create": {
+      "filePath": "(app)/_app.users.create.tsx",
+      "parent": "/(app)/_app"
+    },
+    "/(app)/_app/users/": {
+      "filePath": "(app)/_app.users.index.tsx",
+      "parent": "/(app)/_app"
+    },
+    "/(app)/_app/users/$userId/edit": {
+      "filePath": "(app)/_app.users.$userId.edit.tsx",
       "parent": "/(app)/_app"
     }
   }

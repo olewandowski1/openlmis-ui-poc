@@ -5,7 +5,7 @@ import {
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from '@tanstack/react-router';
-import { Home } from 'lucide-react';
+import { Home, Bell } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const SAMPLE_ROUTES = [
@@ -13,6 +13,12 @@ const SAMPLE_ROUTES = [
     key: 'home',
     href: '/home',
     icon: Home,
+    isActive: true,
+  },
+  {
+    key: 'notifications',
+    href: '/notifications',
+    icon: Bell,
     isActive: true,
   },
 ];

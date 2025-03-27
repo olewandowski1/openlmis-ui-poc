@@ -34,6 +34,7 @@ import { Typography } from '@/components/ui/typography';
 import { useCreateColumns } from '@/features/users/components/users-table-columns';
 import { useUsers } from '@/features/users/hooks/use-users';
 import { cn } from '@/lib/utils';
+import { Link } from '@tanstack/react-router';
 import {
   ColumnFiltersState,
   SortingState,
@@ -201,7 +202,7 @@ export const UsersTable = () => {
                   </Typography.P>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align='end'>
+              <DropdownMenuContent align='end' sideOffset={4}>
                 {table
                   .getAllColumns()
                   .filter((column) => column.getCanHide())
@@ -222,9 +223,15 @@ export const UsersTable = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button>
-              <Plus className='-ms-1 opacity-60' size={16} aria-hidden='true' />
-              <Typography.P className='text-sm'> {t('addUser')} </Typography.P>
+            <Button asChild>
+              <Link to='/users/create'>
+                <Plus
+                  className='-ms-1 opacity-60'
+                  size={16}
+                  aria-hidden='true'
+                />
+                <Typography.P className='text-sm'>{t('addUser')}</Typography.P>
+              </Link>
             </Button>
           </div>
         </div>

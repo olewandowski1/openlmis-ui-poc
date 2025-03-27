@@ -1,4 +1,3 @@
-import { NotificationButton } from '@/components/notification-button';
 import { AppSidebar } from '@/components/sidebar/sidebar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -43,8 +42,6 @@ function ProtectedLayout() {
           <SidebarTrigger />
 
           <Separator orientation='vertical' className='h-8' />
-
-          <NotificationButton />
 
           <Button className='ml-auto' onClick={handleLogout}>
             <LogOut className='-ms-1 opacity-60' size={16} aria-hidden='true' />

@@ -1,14 +1,28 @@
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { User } from '@/features/users/hooks/use-users';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Link } from '@tanstack/react-router';
 import { ColumnDef, FilterFn } from '@tanstack/react-table';
-import { Check, LockKeyholeOpen, Pencil, Shield, X } from 'lucide-react';
+import {
+  Check,
+  EllipsisVertical,
+  LockKeyholeOpen,
+  Pencil,
+  Shield,
+  X,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const statusFilterFn: FilterFn<User> = (
@@ -119,66 +133,103 @@ export const useCreateColumns = (): ColumnDef<User>[] => {
   ];
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const RowActions: React.FC<{ item: User }> = ({ item }) => {
+  const isMobile = useIsMobile();
   const { t } = useTranslation('translation', {
     keyPrefix: 'app.Users',
   });
 
+  if (isMobile) {
+    return (
+      <div className='flex justify-end gap-2 py-3'>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              size='icon'
+              variant='outline'
+              aria-label={t('userActions')}
+              asChild
+            >
+              <Link to='/users/$userId/edit' params={{ userId: item.id }}>
+                <EllipsisVertical size={16} aria-hidden='true' />
+              </Link>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>
+              <Pencil size={16} aria-hidden='true' />
+              <span>{t('editUser')}</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Shield size={16} aria-hidden='true' />
+              <span>{t('managePermissions')}</span>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <LockKeyholeOpen size={16} aria-hidden='true' />
+              <span>{t('resetPassword')}</span>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    );
+  }
+
   return (
     <div className='flex justify-end gap-2 py-3'>
-      <TooltipProvider delayDuration={0}>
-        {/* Edit Button */}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button size='icon' variant='default' aria-label={t('editUser')}>
+      {/* Edit Button */}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            size='icon'
+            variant='default'
+            aria-label={t('editUser')}
+            asChild
+          >
+            <Link to='/users/$userId/edit' params={{ userId: item.id }}>
               <Pencil size={16} aria-hidden='true' />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent className='px-2 py-1 text-sm'>
-            {t('editUser')}
-          </TooltipContent>
-        </Tooltip>
+            </Link>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent className='px-2 py-1 text-sm'>
+          {t('editUser')}
+        </TooltipContent>
+      </Tooltip>
 
-        {/* Manage Permissions Button */}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              size='icon'
-              variant='outline'
-              aria-label={t('managePermissions')}
-            >
-              <Shield
-                className='text-muted-foreground/80'
-                size={16}
-                aria-hidden='true'
-              />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent className='px-2 py-1 text-sm'>
-            {t('managePermissions')}
-          </TooltipContent>
-        </Tooltip>
+      {/* Manage Permissions Button */}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            size='icon'
+            variant='outline'
+            aria-label={t('managePermissions')}
+          >
+            <Shield
+              className='text-muted-foreground/80'
+              size={16}
+              aria-hidden='true'
+            />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent className='px-2 py-1 text-sm'>
+          {t('managePermissions')}
+        </TooltipContent>
+      </Tooltip>
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              size='icon'
-              variant='outline'
-              aria-label={t('resetPassword')}
-            >
-              <LockKeyholeOpen
-                className='text-muted-foreground/80'
-                size={16}
-                aria-hidden='true'
-              />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent className='px-2 py-1 text-sm'>
-            {t('resetPassword')}
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      {/* Reset Password Button */}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button size='icon' variant='outline' aria-label={t('resetPassword')}>
+            <LockKeyholeOpen
+              className='text-muted-foreground/80'
+              size={16}
+              aria-hidden='true'
+            />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent className='px-2 py-1 text-sm'>
+          {t('resetPassword')}
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };

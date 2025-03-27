@@ -44,7 +44,8 @@
       "logout": "Sair"
     },
     "MainRoutes": {
-      "home": "Início"
+      "home": "Início",
+      "notifications": "Notificações"
     },
     "MenuRoutes": {
       "administration": "Administração",
@@ -96,7 +97,8 @@
       "home": "Início",
       "administration": "Administração",
       "users": "Usuário",
-      "loading": "Carregando Usuários..."
+      "loading": "Carregando Usuários...",
+      "userActions": "Ações de Usuário"
     },
     "NotFoundPage": {
       "title": "Página não encontrada",

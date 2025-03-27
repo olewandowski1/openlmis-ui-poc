@@ -20,7 +20,7 @@ function HomePage() {
     keyPrefix: 'app.HomePage',
   });
 
-  // TODO: For now, we are showing a skeleton loader while the data is being fetched.
+  // TODO: For now, we are showing a skeleton loader while the user is being fetched.
   if (isLoading) {
     return <HomePageSkeleton />;
   }

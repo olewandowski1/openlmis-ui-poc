@@ -44,7 +44,8 @@
       "logout": "Log out"
     },
     "MainRoutes": {
-      "home": "Home"
+      "home": "Home",
+      "notifications": "Notifications"
     },
     "MenuRoutes": {
       "administration": "Administration",
@@ -96,7 +97,8 @@
       "home": "Home",
       "administration": "Administration",
       "users": "Users",
-      "loading": "Loading Users..."
+      "loading": "Loading Users...",
+      "userActions": "User Actions"
     },
     "NotFoundPage": {
       "title": "Page not found",
