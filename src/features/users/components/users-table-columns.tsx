@@ -11,8 +11,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { User } from '@/features/users/hooks/use-users';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { User } from '@/lib/types';
 import { Link } from '@tanstack/react-router';
 import { ColumnDef, FilterFn } from '@tanstack/react-table';
 import {
@@ -156,9 +156,11 @@ const RowActions: React.FC<{ item: User }> = ({ item }) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem>
-              <Pencil size={16} aria-hidden='true' />
-              <span>{t('editUser')}</span>
+            <DropdownMenuItem asChild>
+              <Link to='/users/$userId/edit' params={{ userId: item.id }}>
+                <Pencil size={16} aria-hidden='true' />
+                <span>{t('editUser')}</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Shield size={16} aria-hidden='true' />

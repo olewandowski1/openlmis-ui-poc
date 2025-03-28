@@ -46,7 +46,7 @@ const typographyOptions = {
   ),
 
   P: ({ children, className }: TypographyProps) => (
-    <p className={cn('leading-7 text-base font-normal', className)}>
+    <p className={cn('leading-7 text-sm font-normal', className)}>
       {children}
     </p>
   ),

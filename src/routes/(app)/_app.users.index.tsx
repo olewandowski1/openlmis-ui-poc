@@ -22,7 +22,7 @@ function UsersPage() {
   return (
     <>
       <div className='p-2 md:py-2 md:p-4 flex flex-row items-center justify-start gap-2'>
-        <div className='size-7 flex justify-center items-center rounded-md bg-gradient-to-br from-accent/60 to-accent'>
+        <div className='size-6 flex justify-center items-center rounded-md bg-gradient-to-br from-accent/60 to-accent'>
           <UsersRound size={16} />
         </div>
         <Typography.H1 className='text-xl font-bold'>

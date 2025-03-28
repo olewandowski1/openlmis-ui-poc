@@ -1,7 +1,7 @@
 import { Typography } from '@/components/ui/typography';
 import { HomePageDashboard } from '@/features/dashboard/components/home-page-dashboard';
 import { HomePageSkeleton } from '@/features/dashboard/components/home-page-skeleton';
-import { useUser } from '@/hooks/use-user';
+import { useLoggedUser } from '@/features/users/hooks/use-user';
 import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
@@ -15,7 +15,7 @@ export const Route = createFileRoute('/(app)/_app/home')({
  * Home page for the app. It is the first page that the user sees after logging in.
  */
 function HomePage() {
-  const { isLoading } = useUser();
+  const { isLoading } = useLoggedUser();
   const { t } = useTranslation('translation', {
     keyPrefix: 'app.HomePage',
   });

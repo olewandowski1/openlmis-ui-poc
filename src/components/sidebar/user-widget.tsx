@@ -18,7 +18,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { useAuthActions } from '@/features/auth/hooks/use-auth-actions';
-import { useUser } from '@/hooks/use-user';
+import { useLoggedUser } from '@/features/users/hooks/use-user';
 import { useNavigate } from '@tanstack/react-router';
 import {
   ChevronsUpDown,
@@ -41,7 +41,7 @@ export const UserWidget = () => {
   const { logout } = useAuthActions();
   const navigate = useNavigate();
 
-  const { user, isLoading } = useUser();
+  const { user, isLoading } = useLoggedUser();
 
   const { state } = useSidebar();
   const isExpanded = state === 'expanded';
