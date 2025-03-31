@@ -100,11 +100,6 @@ export const useCreateColumns = (): ColumnDef<User>[] => {
       size: 110,
     },
     {
-      accessorKey: 'email',
-      header: t('email'),
-      size: 110,
-    },
-    {
       accessorKey: 'active',
       header: t('status'),
       cell: ({ row }) => {

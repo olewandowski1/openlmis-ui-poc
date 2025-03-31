@@ -69,7 +69,6 @@ export const UsersTable = () => {
   const isMobile = useIsMobile();
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     active: !isMobile,
-    email: false,
     firstName: !isMobile,
     lastName: !isMobile,
   });
