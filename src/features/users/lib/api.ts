@@ -6,6 +6,7 @@ import {
   UserDetailsApiResponse,
   UsersApiResponse,
 } from '@/features/users/lib/types';
+import { createUserUpdatePayload } from '@/features/users/lib/utils';
 
 export const fetchUser = async (userId: string | null) => {
   const [apiUserResponse, apiUserContactDetailsResponse, apiUserAuthResponse] =
@@ -32,9 +33,28 @@ export const fetchUsers = async () => {
 };
 
 export const updateUser = async (userId: string, data: BaseUserFormData) => {
-  console.log(`Updating user ${userId} with data:`, data);
-  // Replace with: const response = await axiosInstance.put(`/api/users/${userId}`, data);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  // Return mock updated user data (adjust based on your API response)
-  return { id: userId, ...data };
+  const { userDetailsPayload, userContactDetailsPayload, userAuthPayload } =
+    createUserUpdatePayload(userId, data);
+
+  const [apiUserResponse, apiUserContactDetailsResponse, apiUserAuthResponse] =
+    await Promise.all([
+      axiosInstance.put<Partial<UserDetailsApiResponse>>(
+        `/api/users`,
+        userDetailsPayload
+      ),
+      axiosInstance.put<Partial<UserContactDetailsApiResponse>>(
+        `/api/userContactDetails/${userId}`,
+        userContactDetailsPayload
+      ),
+      axiosInstance.post<Partial<UserAuthApiResponse>>(
+        `/api/users/auth`,
+        userAuthPayload
+      ),
+    ]);
+
+  return {
+    ...apiUserResponse.data,
+    ...apiUserContactDetailsResponse.data,
+    ...apiUserAuthResponse.data,
+  };
 };

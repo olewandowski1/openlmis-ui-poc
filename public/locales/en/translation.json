@@ -137,7 +137,7 @@
       "saveButton": "Save Changes",
       "cancelButton": "Cancel",
       "updateUserError": "An error occurred while updating the user. Please try again.",
-      "updateUserSuccess": "User updated successfully."
+      "updateUserSuccess": "The user has been successfully updated."
     },
     "NotFoundPage": {
       "title": "Page not found",

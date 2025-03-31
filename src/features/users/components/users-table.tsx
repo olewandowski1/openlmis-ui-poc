@@ -33,6 +33,7 @@ import {
 import { Typography } from '@/components/ui/typography';
 import { useCreateColumns } from '@/features/users/components/users-table-columns';
 import { useUsers } from '@/features/users/hooks/use-users';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
 import {
@@ -58,14 +59,20 @@ import {
   UserSearch,
   X,
 } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const UsersTable = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { users, isLoading } = useUsers();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const isMobile = useIsMobile();
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    active: !isMobile,
+    email: false,
+    firstName: !isMobile,
+    lastName: !isMobile,
+  });
   const [sorting, setSorting] = useState<SortingState>([
     {
       id: 'username',
@@ -96,17 +103,29 @@ export const UsersTable = () => {
     },
   });
 
+  const showTableResults = !isLoading && table.getRowModel().rows.length > 0;
+  const showNoResults = !isLoading && table.getRowModel().rows.length === 0;
+
+  useEffect(() => {
+    setColumnVisibility((prevState) => ({
+      ...prevState,
+      active: !isMobile,
+      firstName: !isMobile,
+      lastName: !isMobile,
+    }));
+  }, [isMobile]);
+
   return (
     <>
       <div className='space-y-4'>
-        <div className='flex flex-col md:flex-row md:justify-between w-full gap-3'>
+        <div className='flex flex-col md:flex-row md:justify-between w-full gap-3 py-2 md:py-0'>
           <div className='flex items-center gap-3'>
-            <div className='relative'>
+            <div className='relative flex-1'>
               <Input
                 id={`search-input`}
                 ref={inputRef}
                 className={cn(
-                  'peer min-w-60 ps-8 h-9 bg-gradient-to-br from-accent/60 to-accent w-full',
+                  'peer min-w-72 ps-8 h-9 bg-gradient-to-br from-accent/60 to-accent w-full',
                   Boolean(table.getColumn('username')?.getFilterValue()) &&
                     'pe-8'
                 )}
@@ -140,11 +159,14 @@ export const UsersTable = () => {
               )}
             </div>
           </div>
-          <div className='flex items-center gap-3'>
+          <div className='flex flex-col md:flex-row items-center gap-3'>
             {table.getSelectedRowModel().rows.length > 0 && (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button className='ml-auto' variant='outline'>
+                  <Button
+                    className='ml-0 md:ml-auto flex-1 w-full'
+                    variant='outline'
+                  >
                     <Trash
                       className='-ms-1 me-2 opacity-60'
                       size={16}
@@ -181,6 +203,7 @@ export const UsersTable = () => {
                   </div>
                   <AlertDialogFooter>
                     <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+                    // TODO: Implement delete functionality
                     <AlertDialogAction onClick={() => {}}>
                       {t('delete')}
                     </AlertDialogAction>
@@ -191,7 +214,7 @@ export const UsersTable = () => {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant='outline'>
+                <Button variant='outline' className='flex-1 w-full'>
                   <Eye
                     className='-ms-1 opacity-60'
                     size={16}
@@ -223,7 +246,7 @@ export const UsersTable = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Button asChild>
+            <Button asChild className='flex-1 w-full'>
               <Link to='/users/create'>
                 <Plus
                   className='-ms-1 opacity-60'
@@ -237,6 +260,8 @@ export const UsersTable = () => {
         </div>
         <Table className='table-fixed border-separate border-spacing-0 [&_tr:not(:last-child)_td]:border-b'>
           <tbody aria-hidden='true' className='table-row h-1'></tbody>
+
+          {/* Table Columns */}
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className='hover:bg-transparent'>
@@ -296,19 +321,10 @@ export const UsersTable = () => {
               </TableRow>
             ))}
           </TableHeader>
+
+          {/* Table Rows */}
           <TableBody>
-            {isLoading ? (
-              <TableRow className='hover:bg-transparent [&:first-child>td:first-child]:rounded-tl-sm [&:first-child>td:last-child]:rounded-tr-sm [&:last-child>td:first-child]:rounded-bl-sm [&:last-child>td:last-child]:rounded-br-sm'>
-                <TableCell
-                  colSpan={columns.length}
-                  className='text-center h-18'
-                  aria-live='polite'
-                >
-                  <Loader2 className='mx-auto size-8 animate-spin' />
-                  <span className='sr-only'>{t('loading')}</span>
-                </TableCell>
-              </TableRow>
-            ) : table.getRowModel().rows?.length ? (
+            {showTableResults &&
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -324,19 +340,25 @@ export const UsersTable = () => {
                     </TableCell>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow className='hover:bg-transparent [&:first-child>td:first-child]:rounded-tl-sm [&:first-child>td:last-child]:rounded-tr-sm [&:last-child>td:first-child]:rounded-bl-sm [&:last-child>td:last-child]:rounded-br-sm'>
-                <TableCell
-                  colSpan={columns.length}
-                  className='text-center h-18'
-                >
-                  {t('noResults')}
-                </TableCell>
-              </TableRow>
-            )}
+              ))}
           </TableBody>
         </Table>
+
+        {/* Loading / No Results State */}
+        {(isLoading || showNoResults) && (
+          <div className='flex flex-col items-center gap-1'>
+            {isLoading ? (
+              <>
+                <Loader2 className='size-6 animate-spin' />
+                <span className='sr-only'>{t('loading')}</span>
+              </>
+            ) : (
+              <Typography.Small>{t('noResults')}</Typography.Small>
+            )}
+          </div>
+        )}
+
+        {/* Pagination */}
         {table.getRowModel().rows.length > 0 && (
           <div className='flex items-center justify-between gap-3'>
             <Typography.P

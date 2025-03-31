@@ -65,6 +65,7 @@ const schemaWithTranslations = (
     enabled: z.boolean(),
     allowNotifications: z.boolean(),
     emailVerified: z.boolean(),
+    timezone: z.string().optional(),
     password: z
       .string()
       .refine(
@@ -114,6 +115,7 @@ export const UserForm: React.FC<UserFormProps> = ({
         enabled: initialData?.enabled ?? true,
         allowNotifications: initialData?.allowNotify ?? false,
         emailVerified: initialData?.emailDetails?.emailVerified ?? false,
+        timezone: initialData?.timezone ?? '',
         password: '',
         homeFacilityId: initialData?.homeFacilityId ?? '',
       },
@@ -210,7 +212,7 @@ export const UserForm: React.FC<UserFormProps> = ({
                     id={emailVerifiedId}
                     checked={field.value}
                     onCheckedChange={field.onChange}
-                    disabled={!form.getValues('email') || isSubmitting}
+                    disabled
                     aria-describedby={emailVerifiedDescId}
                   />
                 </FormControl>
@@ -371,7 +373,11 @@ export const UserForm: React.FC<UserFormProps> = ({
                     checked={field.value}
                     onCheckedChange={field.onChange}
                     aria-describedby={allowNotificationsDescId}
-                    disabled={isSubmitting}
+                    disabled={
+                      isSubmitting ||
+                      !form.getValues('emailVerified') ||
+                      !form.getValues('email')
+                    }
                   />
                 </FormControl>
               </FormItem>

@@ -22,7 +22,7 @@ export type UserContactDetailsApiResponse = {
   phoneNumber: string | null;
   allowNotify: boolean;
   emailDetails: {
-    email: string;
+    email: string | null;
     emailVerified: boolean;
   };
 };

@@ -11,6 +11,7 @@ export const baseUserFormSchema = z.object({
   allowNotifications: z.boolean().optional(),
   emailVerified: z.boolean(),
   password: z.string().optional(),
+  timezone: z.string().optional().or(z.literal('')),
   homeFacilityId: z.string().optional().or(z.literal('')),
 });
 

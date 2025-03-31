@@ -136,7 +136,8 @@
       "createButton": "Criar Usuário",
       "saveButton": "Salvar Alterações",
       "cancelButton": "Cancelar",
-      "updateUserError": "Ocorreu um erro ao atualizar o usuário. Por favor, tente novamente."
+      "updateUserError": "Ocorreu um erro ao atualizar o usuário. Por favor, tente novamente.",
+      "updateUserSuccess": "O usuário foi atualizado com sucesso."
     },
     "NotFoundPage": {
       "title": "Página não encontrada",
