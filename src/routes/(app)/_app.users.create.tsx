@@ -1,5 +1,6 @@
 import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
+import { CreateUserBreadcrumbs } from '@/features/users/components/create-user-breadcrumbs';
 import { UserForm } from '@/features/users/components/user-form';
 import { createUser } from '@/features/users/lib/api';
 import { BaseUserFormData } from '@/features/users/lib/schemas';
@@ -46,6 +47,8 @@ function CreateUserPage() {
         </div>
         <Typography.H1>{t('createUserPageTitle')}</Typography.H1>
       </div>
+      <Separator />
+      <CreateUserBreadcrumbs />
       <Separator />
       <div className='flex flex-col gap-4 p-2 md:p-4'>
         <UserForm

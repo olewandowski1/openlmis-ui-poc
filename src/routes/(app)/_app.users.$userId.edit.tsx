@@ -1,5 +1,6 @@
 import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
+import { EditUserBreadcrumbs } from '@/features/users/components/edit-user-breadcrumbs';
 import { UserDetailsSkeleton } from '@/features/users/components/user-details-skeleton';
 import { UserForm } from '@/features/users/components/user-form';
 import { useUser } from '@/features/users/hooks/use-user';
@@ -60,6 +61,8 @@ function EditUserPage() {
         </div>
         <Typography.H1>{t('editUserPageTitle')}</Typography.H1>
       </div>
+      <Separator />
+      <EditUserBreadcrumbs />
       <Separator />
       <div className='flex flex-col gap-4 p-2 md:p-4'>
         <UserForm

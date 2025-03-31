@@ -1,5 +1,6 @@
 import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
+import { PasswordResetModal } from '@/features/users/components/password-modal';
 import { UsersTable } from '@/features/users/components/users-table';
 
 import { createFileRoute } from '@tanstack/react-router';
@@ -32,6 +33,8 @@ function UsersPage() {
       <div className='flex flex-col gap-4 p-2 md:p-4'>
         <UsersTable />
       </div>
+
+      <PasswordResetModal />
     </>
   );
 }

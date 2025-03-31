@@ -11,6 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { usePasswordModal } from '@/features/users/store/password-modal';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { User } from '@/lib/types';
 import { Link } from '@tanstack/react-router';
@@ -135,6 +136,7 @@ export const useCreateColumns = (): ColumnDef<User>[] => {
 
 const RowActions: React.FC<{ item: User }> = ({ item }) => {
   const isMobile = useIsMobile();
+  const passwordModal = usePasswordModal();
   const { t } = useTranslation('translation', {
     keyPrefix: 'app.Users',
   });
@@ -220,7 +222,12 @@ const RowActions: React.FC<{ item: User }> = ({ item }) => {
       {/* Reset Password Button */}
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size='icon' variant='outline' aria-label={t('resetPassword')}>
+          <Button
+            size='icon'
+            variant='outline'
+            aria-label={t('resetPassword')}
+            onClick={() => passwordModal.open(item.username)}
+          >
             <LockKeyholeOpen
               className='text-muted-foreground/80'
               size={16}

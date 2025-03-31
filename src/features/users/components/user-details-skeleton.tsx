@@ -8,6 +8,14 @@ export const UserDetailsSkeleton = () => {
         <Skeleton className='h-7 w-48' />
       </div>
       <Skeleton className='h-px w-full' />
+      <div className='p-3 md:p-4 flex flex-row items-center justify-start gap-2'>
+        <Skeleton className='size-4 rounded-sm' />
+        <Skeleton className='h-4 w-2' />
+        <Skeleton className='h-4 w-16' />
+        <Skeleton className='h-4 w-2' />
+        <Skeleton className='h-4 w-24' />
+      </div>
+      <Skeleton className='h-px w-full' />
       <div className='flex justify-start'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-x-6 w-full max-w-prose md:max-w-none p-4'>
           {/* Left Column Group */}

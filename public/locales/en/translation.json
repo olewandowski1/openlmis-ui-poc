@@ -138,7 +138,20 @@
       "saveButton": "Save Changes",
       "cancelButton": "Cancel",
       "updateUserError": "An error occurred while updating the user. Please try again.",
-      "updateUserSuccess": "The user has been successfully updated."
+      "updateUserSuccess": "The user has been successfully updated.",
+      "passwordMinLength": "Password must be at least 8 characters long.",
+      "passwordNumberRequired": "Password must contain at least one number.",
+      "resetPasswordSuccess": "Password has been successfully reset.",
+      "setNewPassword": "Set New Password",
+      "setNewPasswordDescription": "Enter a new password for the user {{username}}.",
+      "passwordRequirementsTitle": "Password Requirements",
+      "passwordRequirementsLength": "Must be at least 8 characters long.",
+      "passwordRequirementsCharacters": "Must contain at least one number.",
+      "passwordLabel": "Password",
+      "newPasswordLabel": "New Password",
+      "passwordPlaceholder": "Enter new password",
+      "saving": "Saving...",
+      "saveNewPassword": "Save New Password"
     },
     "NotFoundPage": {
       "title": "Page not found",

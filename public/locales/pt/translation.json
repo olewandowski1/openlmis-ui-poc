@@ -138,7 +138,20 @@
       "saveButton": "Salvar Alterações",
       "cancelButton": "Cancelar",
       "updateUserError": "Ocorreu um erro ao atualizar o usuário. Por favor, tente novamente.",
-      "updateUserSuccess": "O usuário foi atualizado com sucesso."
+      "updateUserSuccess": "O usuário foi atualizado com sucesso.",
+      "passwordMinLength": "A senha deve ter pelo menos 8 caracteres.",
+      "passwordNumberRequired": "A senha deve conter pelo menos um número.",
+      "resetPasswordSuccess": "A senha foi redefinida com sucesso.",
+      "setNewPassword": "Definir Nova Senha",
+      "setNewPasswordDescription": "Digite uma nova senha para o usuário {{username}}.",
+      "passwordRequirementsTitle": "Requisitos da Senha",
+      "passwordRequirementsLength": "Deve ter pelo menos 8 caracteres.",
+      "passwordRequirementsCharacters": "Deve conter pelo menos um número.",
+      "passwordLabel": "Senha",
+      "newPasswordLabel": "Nova Senha",
+      "passwordPlaceholder": "Digite a nova senha",
+      "saving": "Salvando...",
+      "saveNewPassword": "Salvar Nova Senha"
     },
     "NotFoundPage": {
       "title": "Página não encontrada",

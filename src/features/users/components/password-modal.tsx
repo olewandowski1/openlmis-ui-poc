@@ -17,15 +17,15 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Typography } from '@/components/ui/typography';
 import { resetUserPassword } from '@/features/users/lib/api';
 import { usePasswordModal } from '@/features/users/store/password-modal';
 import { queryKeys } from '@/lib/query-keys';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
 import { TFunction } from 'i18next';
-import { KeyRoundIcon, Loader2 } from 'lucide-react';
-import { useEffect, useId } from 'react';
+import { CircleAlertIcon, KeyRoundIcon, Loader2 } from 'lucide-react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -33,14 +33,24 @@ import { z } from 'zod';
 
 const passwordSchema = (t: TFunction<'translation', 'app.Users'>) =>
   z.object({
-    newPassword: z.string().min(1, { message: t('passwordRequired') }),
+    newPassword: z
+      .string()
+      .min(8, { message: t('passwordMinLength') })
+      .refine(
+        (value) => {
+          const hasNumber = /\d/.test(value);
+          return hasNumber;
+        },
+        {
+          message: t('passwordNumberRequired'),
+        }
+      ),
   });
 
 type PasswordFormData = z.infer<ReturnType<typeof passwordSchema>>;
 
 export const PasswordResetModal = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const { isOpen, close: closeModal, username } = usePasswordModal();
   const { t } = useTranslation('translation', {
     keyPrefix: 'app.Users',
@@ -53,8 +63,6 @@ export const PasswordResetModal = () => {
       newPassword: '',
     },
   });
-
-  const newPasswordId = useId();
 
   useEffect(() => {
     if (isOpen) {
@@ -70,7 +78,6 @@ export const PasswordResetModal = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [queryKeys.users] });
       toast.success(t('resetPasswordSuccess'));
-      navigate({ to: '/users' });
       closeModal();
     },
     onError: (error) => {
@@ -100,12 +107,32 @@ export const PasswordResetModal = () => {
             <KeyRoundIcon className='opacity-80' size={16} />
           </div>
           <DialogHeader>
-            <DialogTitle className='text-center'>Set New Password</DialogTitle>
+            <DialogTitle className='text-center'>
+              {t('setNewPassword')}
+            </DialogTitle>
             <DialogDescription className='text-center'>
-              Enter a new password for user{' '}
-              <span className='font-medium text-foreground'>{username}</span>.
+              {t('setNewPasswordDescription', { username })}
             </DialogDescription>
           </DialogHeader>
+        </div>
+
+        <div className='rounded-md border px-4 py-3'>
+          <div className='flex gap-3'>
+            <CircleAlertIcon
+              className='mt-0.5 shrink-0 text-destructive opacity-60'
+              size={16}
+              aria-hidden='true'
+            />
+            <div className='grow space-y-1'>
+              <p className='text-sm font-medium'>
+                {t('passwordRequirementsTitle')}
+              </p>
+              <ul className='text-muted-foreground list-inside list-disc text-sm'>
+                <li>{t('passwordRequirementsLength')}</li>
+                <li>{t('passwordRequirementsCharacters')}</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <Form {...form}>
@@ -117,19 +144,19 @@ export const PasswordResetModal = () => {
               control={form.control}
               name='newPassword'
               render={({ field }) => (
-                <FormItem className='space-y-1.5'>
-                  <FormLabel htmlFor={newPasswordId}>New Password</FormLabel>
+                <FormItem>
+                  <FormLabel className='flex items-center justify-between h-5'>
+                    <Typography.P>
+                      {t('newPasswordLabel')}
+                      <span className='ml-1 text-destructive'>*</span>
+                    </Typography.P>
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      id={newPasswordId}
                       type='password'
-                      placeholder='Enter new password'
+                      placeholder={t('passwordPlaceholder')}
                       disabled={mutation.isPending}
                       aria-required='true'
-                      aria-invalid={
-                        !!form.formState.errors.newPassword ||
-                        !!form.formState.errors.root?.serverError
-                      }
                       {...field}
                     />
                   </FormControl>
@@ -137,12 +164,6 @@ export const PasswordResetModal = () => {
                 </FormItem>
               )}
             />
-
-            {form.formState.errors.root?.serverError && (
-              <p className='text-sm text-destructive text-center'>
-                {form.formState.errors.root.serverError.message}
-              </p>
-            )}
 
             <DialogFooter className='pt-4 sm:justify-between gap-2'>
               <DialogClose asChild>
@@ -152,7 +173,7 @@ export const PasswordResetModal = () => {
                   className='flex-1'
                   disabled={mutation.isPending}
                 >
-                  Cancel
+                  {t('cancel')}
                 </Button>
               </DialogClose>
               <Button
@@ -163,10 +184,10 @@ export const PasswordResetModal = () => {
                 {mutation.isPending ? (
                   <>
                     <Loader2 className='mr-2 h-4 w-4 animate-spin' />
-                    Saving...
+                    {t('saving')}
                   </>
                 ) : (
-                  'Save New Password'
+                  t('saveNewPassword')
                 )}
               </Button>
             </DialogFooter>
