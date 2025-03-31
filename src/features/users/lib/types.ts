@@ -35,6 +35,11 @@ export type UserAuthApiResponse = {
   lockedOut: boolean;
 };
 
+export type UserAuthPasswordResetResponse = {
+  newPassword: string;
+  username: string;
+};
+
 export type UserData = UserDetailsApiResponse &
   UserContactDetailsApiResponse &
   UserAuthApiResponse;

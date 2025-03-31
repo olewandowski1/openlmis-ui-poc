@@ -76,6 +76,7 @@
       "selectRow": "Select user {{name}}",
       "editUser": "Edit user",
       "editUserPageTitle": "Edit User",
+      "createUserPageTitle": "Create User",
       "managePermissions": "Manage permissions",
       "resetPassword": "Reset password",
       "searchByUsername": "Search by username",

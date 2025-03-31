@@ -112,7 +112,6 @@ export const LoginForm = () => {
                       </FormLabel>
                       <FormControl className='relative'>
                         <Input
-                          className='pe-9'
                           placeholder={t('passwordPlaceholder')}
                           type='password'
                           {...field}

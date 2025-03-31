@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/sidebar';
 import { Typography } from '@/components/ui/typography';
 import { useAuthActions } from '@/features/auth/hooks/use-auth-actions';
-import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
+import { Outlet, createFileRoute, useNavigate } from '@tanstack/react-router';
 import { LogOut } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

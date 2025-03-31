@@ -76,6 +76,7 @@
       "selectRow": "Selecionar usuário {{name}}",
       "editUser": "Editar usuário",
       "editUserPageTitle": "Editar Usuário",
+      "createUserPageTitle": "Criar Usuário",
       "managePermissions": "Gerenciar permissões",
       "resetPassword": "Redefinir senha",
       "searchByUsername": "Buscar por nome de usuário",

@@ -1,5 +1,7 @@
 import { BaseUserFormData } from '@/features/users/lib/schemas';
 import {
+  UserAuthApiResponse,
+  UserAuthPasswordResetResponse,
   UserContactDetailsApiResponse,
   UserDetailsApiResponse,
 } from '@/features/users/lib/types';
@@ -31,7 +33,7 @@ export const createUserUpdatePayload = (
     },
   };
 
-  const userAuthPayload = {
+  const userAuthPayload: Partial<UserAuthApiResponse> = {
     id: userId,
     username: data.username,
     enabled: data.enabled,
@@ -41,5 +43,51 @@ export const createUserUpdatePayload = (
     userDetailsPayload,
     userContactDetailsPayload,
     userAuthPayload,
+  };
+};
+
+export const createUserCreatePartialPayload = (data: BaseUserFormData) => {
+  return {
+    username: data.username,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    jobTitle: data.jobTitle,
+    homeFacilityId: data.homeFacilityId,
+    timezone: data.timezone,
+    active: data?.enabled,
+    extraData: {},
+    roleAssignments: [],
+  };
+};
+
+export const createUserCreatePayload = (
+  userId: string,
+  data: BaseUserFormData
+) => {
+  const userContactDetailsPayload: Partial<UserContactDetailsApiResponse> = {
+    phoneNumber: data.phoneNumber,
+    allowNotify: data.allowNotifications,
+    referenceDataUserId: userId,
+    emailDetails: {
+      email: data?.email ?? null,
+      emailVerified: data.emailVerified,
+    },
+  };
+
+  const userAuthPayload: Partial<UserAuthApiResponse> = {
+    id: userId,
+    username: data.username,
+    enabled: data.enabled,
+  };
+
+  const userAuthPasswordResetPayload: Partial<UserAuthPasswordResetResponse> = {
+    username: data.username,
+    newPassword: data.password,
+  };
+
+  return {
+    userContactDetailsPayload,
+    userAuthPayload,
+    userAuthPasswordResetPayload,
   };
 };

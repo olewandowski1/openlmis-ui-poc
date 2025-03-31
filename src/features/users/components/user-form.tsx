@@ -63,22 +63,29 @@ const schemaWithTranslations = (
       .optional()
       .or(z.literal('')),
     enabled: z.boolean(),
-    allowNotifications: z.boolean(),
+    allowNotifications: z.boolean().optional(),
     emailVerified: z.boolean(),
     timezone: z.string().optional(),
     password: z
       .string()
+      .optional()
+      .or(z.literal(''))
       .refine(
         (val) => {
-          if (mode === 'edit') return true;
-          return val.length >= 1;
+          // If mode is 'edit', the field is optional, so any value
+          // (undefined, '', or a string) passes this specific check.
+          if (mode === 'edit') {
+            return true;
+          }
+          // If mode is 'create', the value MUST be a non-empty string.
+          // The base type allows undefined or '', so we must check for that here.
+          return typeof val === 'string' && val.length >= 1;
         },
         {
+          // This message only applies if the refine fails (i.e., mode === 'create' and val is empty/undefined)
           message: t('passwordRequired'),
-          path: mode === 'create' ? ['password'] : [],
         }
-      )
-      .optional(),
+      ),
     homeFacilityId: z.string().optional().or(z.literal('')),
   });
 };
@@ -169,6 +176,33 @@ export const UserForm: React.FC<UserFormProps> = ({
               </FormItem>
             )}
           />
+
+          {mode === 'create' && (
+            <FormField
+              control={form.control}
+              name='password'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className='flex items-center justify-between h-5'>
+                    <Typography.P>
+                      {t('passwordLabel')}
+                      <span className='ml-1 text-destructive'>*</span>
+                    </Typography.P>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type='password'
+                      placeholder={t('passwordPlaceholder')}
+                      disabled={isSubmitting}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                  <FormDescription />
+                </FormItem>
+              )}
+            />
+          )}
 
           <FormField
             control={form.control}
@@ -345,44 +379,48 @@ export const UserForm: React.FC<UserFormProps> = ({
             )}
           />
 
-          <FormField
-            control={form.control}
-            name='allowNotifications'
-            render={({ field }) => (
-              <FormItem className='flex flex-row items-center justify-between rounded-lg border p-2'>
-                <div className='space-y-0.5'>
-                  <FormLabel
-                    htmlFor={allowNotificationsId}
-                    className='text-base'
-                  >
-                    <Typography.P>{t('allowNotificationsLabel')}</Typography.P>
-                  </FormLabel>
-                  <FormDescription
-                    id={allowNotificationsDescId}
-                    className='text-xs'
-                  >
-                    <Typography.Small>
-                      {t('allowNotificationsDescription')}
-                    </Typography.Small>
-                  </FormDescription>
-                </div>
-                <FormMessage />
-                <FormControl>
-                  <Switch
-                    id={allowNotificationsId}
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    aria-describedby={allowNotificationsDescId}
-                    disabled={
-                      isSubmitting ||
-                      !form.getValues('emailVerified') ||
-                      !form.getValues('email')
-                    }
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
+          {mode === 'edit' && (
+            <FormField
+              control={form.control}
+              name='allowNotifications'
+              render={({ field }) => (
+                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-2'>
+                  <div className='space-y-0.5'>
+                    <FormLabel
+                      htmlFor={allowNotificationsId}
+                      className='text-base'
+                    >
+                      <Typography.P>
+                        {t('allowNotificationsLabel')}
+                      </Typography.P>
+                    </FormLabel>
+                    <FormDescription
+                      id={allowNotificationsDescId}
+                      className='text-xs'
+                    >
+                      <Typography.Small>
+                        {t('allowNotificationsDescription')}
+                      </Typography.Small>
+                    </FormDescription>
+                  </div>
+                  <FormMessage />
+                  <FormControl>
+                    <Switch
+                      id={allowNotificationsId}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      aria-describedby={allowNotificationsDescId}
+                      disabled={
+                        isSubmitting ||
+                        !form.getValues('emailVerified') ||
+                        !form.getValues('email')
+                      }
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          )}
 
           <FormField
             control={form.control}
