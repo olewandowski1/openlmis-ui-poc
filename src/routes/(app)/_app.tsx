@@ -1,3 +1,4 @@
+import { OldUiBanner } from '@/components/old-ui-banner';
 import { AppSidebar } from '@/components/sidebar/sidebar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -48,6 +49,8 @@ function ProtectedLayout() {
             <Typography.P className='text-sm'> {t('logout')} </Typography.P>
           </Button>
         </header>
+        <Separator />
+        <OldUiBanner />
         <Separator />
         <Outlet />
       </SidebarInset>

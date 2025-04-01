@@ -27,7 +27,11 @@
   "app": {
     "ProtectedLayout": {
       "notifications": "Notifications",
-      "logout": "Log out"
+      "logout": "Log out",
+      "experimentalUiTitle": "New Experimental OpenLMIS UI Available",
+      "experimentalUiDescription": "Explore the new experimental interface. Your familiar old UI is still available and will remain accessible.",
+      "experimentalUiCheckPrevious": "Check Previous UI",
+      "experimentalUiClose": "Close banner"
     },
     "AppSidebar": {
       "menu": "Menu"

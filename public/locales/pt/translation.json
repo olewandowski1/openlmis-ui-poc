@@ -27,7 +27,11 @@
   "app": {
     "ProtectedLayout": {
       "notifications": "Notificações",
-      "logout": "Sair"
+      "logout": "Sair",
+      "experimentalUiTitle": "Nova interface experimental OpenLMIS disponível",
+      "experimentalUiDescription": "Explore a nova interface experimental. Sua UI antiga e familiar ainda está disponível e permanecerá acessível.",
+      "experimentalUiCheckPrevious": "Verifique a IU anterior",
+      "experimentalUiClose": "Fechar banner"
     },
     "AppSidebar": {
       "menu": "Menu"
