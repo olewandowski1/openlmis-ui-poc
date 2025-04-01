@@ -116,7 +116,7 @@ const RowActions: React.FC<{ item: Role }> = ({ item }) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem asChild>
-              <Link to='/' params={{ roleId: item.id }}>
+              <Link to='/roles/$roleId/edit' params={{ roleId: item.id }}>
                 <Pencil size={16} aria-hidden='true' />
                 <span>{t('editRole')}</span>
               </Link>
@@ -129,7 +129,6 @@ const RowActions: React.FC<{ item: Role }> = ({ item }) => {
 
   return (
     <div className='flex justify-end gap-2 py-3'>
-      {/* Edit Button */}
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
@@ -138,7 +137,7 @@ const RowActions: React.FC<{ item: Role }> = ({ item }) => {
             aria-label={t('editRole')}
             asChild
           >
-            <Link to='/' params={{ roleId: item.id }}>
+            <Link to='/roles/$roleId/edit' params={{ roleId: item.id }}>
               <Pencil size={16} aria-hidden='true' />
             </Link>
           </Button>

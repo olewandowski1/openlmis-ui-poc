@@ -2,6 +2,7 @@ import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import { EditRoleBreadcrumbs } from '@/features/roles/components/edit-role-breadcrumbs';
 import { RoleDetailsSkeleton } from '@/features/roles/components/role-details-skeleton';
+import { RoleForm } from '@/features/roles/components/role-form';
 import { useRole } from '@/features/roles/hooks/use-role';
 import { updateRole } from '@/features/roles/lib/api';
 import { BaseRoleFormData } from '@/features/roles/lib/schemas';
@@ -12,6 +13,7 @@ import {
   useNavigate,
   useParams,
 } from '@tanstack/react-router';
+import { AxiosError } from 'axios';
 import { ShieldCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -29,6 +31,8 @@ function EditRolePage() {
   });
   const { role, isLoading } = useRole(roleId);
 
+  const roleRightType = role?.rights[0].type;
+
   const mutation = useMutation({
     mutationFn: (updatedData: BaseRoleFormData) =>
       updateRole(roleId, updatedData),
@@ -39,8 +43,18 @@ function EditRolePage() {
       toast.success(t('updateRoleSuccess'));
       navigate({ to: '/roles' });
     },
-    onError: () => {
-      toast.error(t('updateRoleError'));
+    onError: (error) => {
+      const axiosError = error as AxiosError;
+      const axiosResponseData = axiosError.response?.data as {
+        messageKey: string;
+        message: string;
+      };
+
+      if (axiosError.status === 400 && axiosResponseData?.messageKey) {
+        toast.error(t(axiosResponseData.messageKey));
+      } else {
+        toast.error(t('updateUserError'));
+      }
     },
   });
 
@@ -50,6 +64,11 @@ function EditRolePage() {
 
   if (isLoading) {
     return <RoleDetailsSkeleton />;
+  }
+
+  if (!roleRightType) {
+    console.error('[EDIT_ROLE_PAGE]: Role rights type is missing');
+    return null;
   }
 
   return (
@@ -64,12 +83,13 @@ function EditRolePage() {
       <EditRoleBreadcrumbs />
       <Separator />
       <div className='flex flex-col gap-4 p-2 md:p-4'>
-        {/* <RoleForm
+        <RoleForm
           mode='edit'
           initialData={role}
           onSubmit={handleSubmit}
           isSubmitting={mutation.isPending}
-        /> */}
+          rightType={roleRightType}
+        />
       </div>
     </>
   );
