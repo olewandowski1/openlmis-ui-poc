@@ -25,6 +25,11 @@ const SAMPLE_ROUTES = [
         href: '/users',
         isActive: true,
       },
+      {
+        key: 'roles',
+        href: '/roles',
+        isActive: true,
+      },
     ],
   },
 ];

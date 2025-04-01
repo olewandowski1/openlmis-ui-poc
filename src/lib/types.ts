@@ -30,13 +30,20 @@ export interface PaginatedResponse<TContentItem> {
   totalPages: number;
 }
 
+export type RightType =
+  | 'SUPERVISION'
+  | 'REPORTS'
+  | 'GENERAL_ADMIN'
+  | 'ORDER_FULFILLMENT';
+
 export type Right = {
   id: string;
   name: string;
-  type: string;
+  type: RightType;
+  attachments: unknown[];
 };
 
-export type RoleAssignment = {
+export type Role = {
   id: string;
   name: string;
   description: string;
@@ -52,7 +59,7 @@ export type User = {
   timezone: string;
   active: boolean;
   extraData: Record<string, unknown>;
-  roleAssignments: RoleAssignment[];
+  roleAssignments: Role[];
 };
 
 export type MinimalFacility = {

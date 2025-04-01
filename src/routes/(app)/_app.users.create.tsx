@@ -7,6 +7,7 @@ import { BaseUserFormData } from '@/features/users/lib/schemas';
 import { queryKeys } from '@/lib/query-keys';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { AxiosError } from 'axios';
 import { User } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -31,7 +32,17 @@ function CreateUserPage() {
       navigate({ to: '/users' });
     },
     onError: (error) => {
-      toast.error(error.message);
+      const axiosError = error as AxiosError;
+      const axiosResponseData = axiosError.response?.data as {
+        messageKey: string;
+        message: string;
+      };
+
+      if (axiosError.status === 400 && axiosResponseData?.messageKey) {
+        toast.error(t(axiosResponseData.messageKey));
+      } else {
+        toast.error(t('createUserError'));
+      }
     },
   });
 

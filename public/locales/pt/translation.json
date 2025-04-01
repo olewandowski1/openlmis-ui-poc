@@ -50,7 +50,8 @@
     "MenuRoutes": {
       "administration": "Administração",
       "home": "Início",
-      "users": "Usuários"
+      "users": "Usuários",
+      "roles": "Funções"
     },
     "NotificationButton": {
       "notifications": "Notificações",
@@ -89,7 +90,7 @@
       "cancel": "Cancelar",
       "columns": "Mostrar / Ocultar Colunas",
       "addUser": "Adicionar Usuário",
-      "pagination": "Página {current} de {total}",
+      "pagination": "Página {{current}} de {{total}}",
       "previous": "Anterior",
       "next": "Próximo",
       "previousPage": "Ir para a página anterior",
@@ -98,7 +99,7 @@
       "sortBy": "Ordenar por {{column}}",
       "home": "Início",
       "administration": "Administração",
-      "users": "Usuários",
+      "usersSection": "Usuários",
       "loading": "Carregando Usuários...",
       "userActions": "Ações de Usuário",
       "usernameRequired": "Nome de usuário é obrigatório",
@@ -139,6 +140,8 @@
       "cancelButton": "Cancelar",
       "updateUserError": "Ocorreu um erro ao atualizar o usuário. Por favor, tente novamente.",
       "updateUserSuccess": "O usuário foi atualizado com sucesso.",
+      "createUserError": "Ocorreu um erro ao criar o usuário. Por favor, tente novamente.",
+      "createUserSuccess": "Usuário foi criado com sucesso.",
       "passwordMinLength": "A senha deve ter pelo menos 8 caracteres.",
       "passwordNumberRequired": "A senha deve conter pelo menos um número.",
       "resetPasswordSuccess": "A senha foi redefinida com sucesso.",
@@ -151,7 +154,63 @@
       "newPasswordLabel": "Nova Senha",
       "passwordPlaceholder": "Digite a nova senha",
       "saving": "Salvando...",
-      "saveNewPassword": "Salvar Nova Senha"
+      "saveNewPassword": "Salvar Nova Senha",
+      "referenceData": {
+        "error": {
+          "user": {
+            "username": {
+              "duplicated": "Nome de usuário já existe. Por favor, insira um nome de usuário diferente."
+            }
+          }
+        }
+      },
+      "users": {
+        "passwordReset": {
+          "tooWeak": "A senha é muito fraca. Por favor, insira uma senha mais forte. NOTA: O usuário pode ter sido criado. Use 'Redefinir Senha' para definir uma nova senha.",
+          "notContainNumber": "A senha deve conter pelo menos um número."
+        }
+      }
+    },
+    "Roles": {
+      "rolesSection": "Funções",
+      "searchByRoleName": "Buscar por nome da função",
+      "clearFilter": "Limpar filtro",
+      "columns": "Mostrar / Ocultar Colunas",
+      "addRole": "Adicionar Função",
+      "sortBy": "Ordenar por {{column}}",
+      "loading": "Carregando Funções...",
+      "noResults": "Nenhuma função encontrada.",
+      "pagination": "Página {{current}} de {{total}}",
+      "previousPage": "Ir para a página anterior",
+      "previous": "Anterior",
+      "nextPage": "Ir para a próxima página",
+      "next": "Próximo",
+      "delete": "Excluir",
+      "deleteConfirmTitle": "Você tem certeza absoluta?",
+      "deleteConfirmDescription": "Esta ação não pode ser desfeita. Isso excluirá permanentemente {{count}} {{roles}} selecionadas.",
+      "role": "função",
+      "roles": "funções",
+      "cancel": "Cancelar",
+      "selectAll": "Selecionar todas",
+      "select": "Selecionar",
+      "selectRow": "Selecionar função {{name}}",
+      "roleName": "Nome da Função",
+      "roleType": "Tipo da Função",
+      "description": "Descrição",
+      "numberOfUsers": "Usuários",
+      "actions": "Ações",
+      "roleActions": "Ações da Função",
+      "editRole": "Editar função",
+      "manageRights": "Gerenciar direitos",
+      "name": "Nome",
+      "type": "Tipo",
+      "count": "Contagem de Usuários",
+      "rightType": {
+        "SUPERVISION": "Supervisão",
+        "GENERAL_ADMIN": "Administração",
+        "REPORTS": "Relatórios",
+        "ORDER_FULFILLMENT": "Atendimento"
+      }
     },
     "NotFoundPage": {
       "title": "Página não encontrada",

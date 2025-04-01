@@ -50,7 +50,8 @@
     "MenuRoutes": {
       "administration": "Administration",
       "home": "Home",
-      "users": "Users"
+      "users": "Users",
+      "roles": "Roles"
     },
     "NotificationButton": {
       "notifications": "Notifications",
@@ -98,7 +99,7 @@
       "sortBy": "Sort by {{column}}",
       "home": "Home",
       "administration": "Administration",
-      "users": "Users",
+      "usersSection": "Users",
       "loading": "Loading Users...",
       "userActions": "User Actions",
       "usernameRequired": "Username is required",
@@ -151,7 +152,65 @@
       "newPasswordLabel": "New Password",
       "passwordPlaceholder": "Enter new password",
       "saving": "Saving...",
-      "saveNewPassword": "Save New Password"
+      "saveNewPassword": "Save New Password",
+      "referenceData": {
+        "error": {
+          "user": {
+            "username": {
+              "duplicated": "Username already exists. Please enter a different username."
+            }
+          }
+        }
+      },
+      "users": {
+        "passwordReset": {
+          "tooWeak": "Password is too weak. Please enter a stronger password. NOTE: User might be created. Use the 'Reset Password' to set a new password.",
+          "notContainNumber": "Password must contain at least one number."
+        }
+      },
+      "createUserSuccess": "User has been successfully created.",
+      "createUserError": "An error occurred while creating the user. Please try again."
+    },
+    "Roles": {
+      "rolesSection": "Roles",
+      "searchByRoleName": "Search by role name",
+      "clearFilter": "Clear filter",
+      "columns": "Show / Hide Columns",
+      "addRole": "Add Role",
+      "sortBy": "Sort by {{column}}",
+      "loading": "Loading Roles...",
+      "noResults": "No roles found.",
+      "pagination": "Page {{current}} of {{total}}",
+      "previousPage": "Go to previous page",
+      "previous": "Previous",
+      "nextPage": "Go to next page",
+      "next": "Next",
+      "delete": "Delete",
+      "deleteConfirmTitle": "Are you absolutely sure?",
+      "deleteConfirmDescription": "This action cannot be undone. This will permanently delete {{count}} selected {{roles}}.",
+      "role": "role",
+      "roles": "roles",
+      "cancel": "Cancel",
+      "selectAll": "Select all",
+      "select": "Select",
+      "selectRow": "Select role {{name}}",
+      "roleName": "Role Name",
+      "roleType": "Role Type",
+      "description": "Description",
+      "numberOfUsers": "Users",
+      "actions": "Actions",
+      "roleActions": "Role Actions",
+      "editRole": "Edit role",
+      "manageRights": "Manage rights",
+      "name": "Name",
+      "type": "Type",
+      "count": "User Count",
+      "rightType": {
+        "SUPERVISION": "Supervision",
+        "GENERAL_ADMIN": "Administration",
+        "REPORTS": "Reports",
+        "ORDER_FULFILLMENT": "Fulfillment"
+      }
     },
     "NotFoundPage": {
       "title": "Page not found",

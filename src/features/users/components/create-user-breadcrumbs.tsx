@@ -29,7 +29,7 @@ export const CreateUserBreadcrumbs = () => {
         <BreadcrumbSeparator> · </BreadcrumbSeparator>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link to='/users'>{t('users')}</Link>
+            <Link to='/users'>{t('usersSection')}</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator> · </BreadcrumbSeparator>

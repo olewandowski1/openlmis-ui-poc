@@ -1,14 +1,3 @@
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -31,8 +20,8 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Typography } from '@/components/ui/typography';
-import { useCreateColumns } from '@/features/users/components/users-table-columns';
-import { useUsers } from '@/features/users/hooks/use-users';
+import { useCreateColumns } from '@/features/roles/components/roles-table-columns';
+import { useRoles } from '@/features/roles/hooks/use-roles';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { Link } from '@tanstack/react-router';
@@ -55,37 +44,36 @@ import {
   Eye,
   Loader2,
   Plus,
-  Trash,
-  UserSearch,
+  ShieldCheck,
   X,
 } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export const UsersTable = () => {
+export const RolesTable = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { users, isLoading } = useUsers();
+  const { roles, isLoading } = useRoles();
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const isMobile = useIsMobile();
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
-    active: !isMobile,
-    firstName: !isMobile,
-    lastName: !isMobile,
+    description: !isMobile,
+    count: !isMobile,
+    type: !isMobile,
   });
   const [sorting, setSorting] = useState<SortingState>([
     {
-      id: 'username',
+      id: 'name',
       desc: false,
     },
   ]);
   const { t } = useTranslation('translation', {
-    keyPrefix: 'app.Users',
+    keyPrefix: 'app.Roles',
   });
 
   const columns = useCreateColumns();
 
   const table = useReactTable({
-    data: users,
+    data: roles,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -108,9 +96,9 @@ export const UsersTable = () => {
   useEffect(() => {
     setColumnVisibility((prevState) => ({
       ...prevState,
-      active: !isMobile,
-      firstName: !isMobile,
-      lastName: !isMobile,
+      description: !isMobile,
+      count: !isMobile,
+      type: !isMobile,
     }));
   }, [isMobile]);
 
@@ -125,29 +113,27 @@ export const UsersTable = () => {
                 ref={inputRef}
                 className={cn(
                   'peer min-w-72 ps-8 h-9 bg-gradient-to-br from-accent/60 to-accent w-full',
-                  Boolean(table.getColumn('username')?.getFilterValue()) &&
-                    'pe-8'
+                  Boolean(table.getColumn('name')?.getFilterValue()) && 'pe-8'
                 )}
                 value={
-                  (table.getColumn('username')?.getFilterValue() ??
-                    '') as string
+                  (table.getColumn('name')?.getFilterValue() ?? '') as string
                 }
                 onChange={(e) =>
-                  table.getColumn('username')?.setFilterValue(e.target.value)
+                  table.getColumn('name')?.setFilterValue(e.target.value)
                 }
-                placeholder={t('searchByUsername')}
+                placeholder={t('searchByRoleName')}
                 type='text'
-                aria-label={t('searchByUsername')}
+                aria-label={t('searchByRoleName')}
               />
               <div className='absolute inset-y-0 flex items-center justify-center pointer-events-none start-0 ps-2 text-muted-foreground/60 peer-disabled:opacity-50'>
-                <UserSearch size={16} aria-hidden='true' />
+                <ShieldCheck size={16} aria-hidden='true' />{' '}
               </div>
-              {Boolean(table.getColumn('username')?.getFilterValue()) && (
+              {Boolean(table.getColumn('name')?.getFilterValue()) && (
                 <button
                   className='absolute inset-y-0 flex items-center justify-center h-full transition-colors end-0 w-9 rounded-e-sm text-muted-foreground/60 outline-offset-2 hover:text-foreground focus:z-10 focus-visible:outline-2 focus-visible:outline-ring/70 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
                   aria-label={t('clearFilter')}
                   onClick={() => {
-                    table.getColumn('username')?.setFilterValue('');
+                    table.getColumn('name')?.setFilterValue('');
                     if (inputRef.current) {
                       inputRef.current.focus();
                     }
@@ -159,58 +145,6 @@ export const UsersTable = () => {
             </div>
           </div>
           <div className='flex flex-col md:flex-row items-center gap-3'>
-            {table.getSelectedRowModel().rows.length > 0 && (
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button
-                    className='ml-0 md:ml-auto flex-1 w-full'
-                    variant='outline'
-                  >
-                    <Trash
-                      className='-ms-1 me-2 opacity-60'
-                      size={16}
-                      aria-hidden='true'
-                    />
-                    {t('delete')}
-                    <span className='-me-1 ms-3 inline-flex h-5 max-h-full items-center rounded border border-border bg-background px-1 font-[inherit] text-[0.625rem] font-medium text-muted-foreground/70'>
-                      {table.getSelectedRowModel().rows.length}
-                    </span>
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <div className='flex flex-col gap-2 max-sm:items-center sm:flex-row sm:gap-4'>
-                    <div
-                      className='flex items-center justify-center border rounded-full size-9 shrink-0 border-border'
-                      aria-hidden='true'
-                    >
-                      <Trash className='opacity-80' size={16} />
-                    </div>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        {t('deleteConfirmTitle')}
-                      </AlertDialogTitle>
-                      <AlertDialogDescription>
-                        {t('deleteConfirmDescription', {
-                          count: table.getSelectedRowModel().rows.length,
-                          rows:
-                            table.getSelectedRowModel().rows.length === 1
-                              ? t('row')
-                              : t('rows'),
-                        })}
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                  </div>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
-                    // TODO: Implement delete functionality
-                    <AlertDialogAction onClick={() => {}}>
-                      {t('delete')}
-                    </AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
-            )}
-
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant='outline' className='flex-1 w-full'>
@@ -224,7 +158,11 @@ export const UsersTable = () => {
                   </Typography.P>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align='end' sideOffset={4} className='w-(--radix-dropdown-menu-trigger-width)'>
+              <DropdownMenuContent
+                align='end'
+                sideOffset={4}
+                className='w-(--radix-dropdown-menu-trigger-width)'
+              >
                 {table
                   .getAllColumns()
                   .filter((column) => column.getCanHide())
@@ -246,13 +184,13 @@ export const UsersTable = () => {
             </DropdownMenu>
 
             <Button asChild className='flex-1 w-full'>
-              <Link to='/users/create'>
+              <Link to='/'>
                 <Plus
                   className='-ms-1 opacity-60'
                   size={16}
                   aria-hidden='true'
                 />
-                <Typography.P className='text-sm'>{t('addUser')}</Typography.P>
+                <Typography.P className='text-sm'>{t('addRole')}</Typography.P>
               </Link>
             </Button>
           </div>
