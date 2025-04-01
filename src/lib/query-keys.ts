@@ -3,4 +3,6 @@ export const queryKeys = {
   users: 'users',
   minimalFacilities: 'minimalFacilities',
   roles: 'roles',
+  role: 'role',
+  roleRights: 'roleRights',
 };

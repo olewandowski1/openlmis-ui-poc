@@ -2,7 +2,7 @@ import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import { RolesTable } from '@/features/roles/components/roles-table';
 import { createFileRoute } from '@tanstack/react-router';
-import { KeyIcon } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/(app)/_app/roles/')({
@@ -23,7 +23,7 @@ function RolesPage() {
     <>
       <div className='p-3 md:p-4 flex flex-row items-center justify-start gap-2'>
         <div className='size-8 flex justify-center items-center rounded-md bg-gradient-to-br from-accent/60 to-accent'>
-          <KeyIcon size={18} />
+          <ShieldCheck size={18} />
         </div>
         <Typography.H1>{t('rolesSection')}</Typography.H1>
       </div>

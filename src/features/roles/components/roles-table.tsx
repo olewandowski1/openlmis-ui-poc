@@ -184,7 +184,7 @@ export const RolesTable = () => {
             </DropdownMenu>
 
             <Button asChild className='flex-1 w-full'>
-              <Link to='/'>
+              <Link to='/roles/type/create'>
                 <Plus
                   className='-ms-1 opacity-60'
                   size={16}

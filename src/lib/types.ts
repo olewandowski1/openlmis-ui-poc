@@ -1,3 +1,5 @@
+import { ALL_RIGHT_TYPES } from '@/lib/constants';
+
 export interface SortInfo {
   direction: string;
   property: string;
@@ -30,11 +32,7 @@ export interface PaginatedResponse<TContentItem> {
   totalPages: number;
 }
 
-export type RightType =
-  | 'SUPERVISION'
-  | 'REPORTS'
-  | 'GENERAL_ADMIN'
-  | 'ORDER_FULFILLMENT';
+export type RightType = (typeof ALL_RIGHT_TYPES)[number];
 
 export type Right = {
   id: string;

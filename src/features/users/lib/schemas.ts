@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-export const baseUserFormSchema = z.object({
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const baseUserFormSchema = z.object({
   username: z.string().min(1).max(255),
   email: z.string().email().optional(),
   firstName: z.string().min(1).max(255),
