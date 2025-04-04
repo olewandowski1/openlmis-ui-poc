@@ -30,35 +30,6 @@ export default defineConfig(({ mode }) => {
     build: {
       // Disable sourcemaps for production by default
       sourcemap: isProduction ? false : true,
-
-      // Rollup options for advanced configuration
-      rollupOptions: {
-        output: {
-          /**
-           * Manual chunk splitting strategy.
-           * Group common dependencies into separate chunks.
-           */
-          manualChunks(id) {
-            // Group React core libraries
-            if (
-              id.includes('/node_modules/react/') ||
-              id.includes('/node_modules/react-dom/')
-            ) {
-              return 'react-vendor';
-            }
-
-            // Group TanStack libraries (Router, Query, etc.)
-            if (id.includes('/node_modules/@tanstack/')) {
-              return 'tanstack-vendor';
-            }
-
-            // Create a general vendor chunk for other node_modules
-            if (id.includes('/node_modules/')) {
-              return 'vendor';
-            }
-          },
-        },
-      },
     },
   };
 });
