@@ -21,7 +21,7 @@ export const fetchRole = async (roleId: string) => {
 
 export const fetchRoleRights = async (roleRightType?: RightType) => {
   const url = roleRightType
-    ? `/api/rights/search/?type=${roleRightType}`
+    ? `/api/rights/search?type=${roleRightType}`
     : '/api/rights/search';
 
   const { data: apiRoleRightsResponse } = await axiosInstance.get<Right[]>(url);
