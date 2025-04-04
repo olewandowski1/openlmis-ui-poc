@@ -10,23 +10,27 @@ export const NotFoundPage = () => {
   });
 
   return (
-    <div className='w-full h-screen flex flex-col gap-4 justify-center items-center'>
-      <Typography.Large> 404 </Typography.Large>
+    <>
+      <title> OpenLMIS - 404 </title>
 
-      <Typography.H1> {t('title')} </Typography.H1>
+      <div className='w-full h-screen flex flex-col gap-4 justify-center items-center'>
+        <Typography.Large> 404 </Typography.Large>
 
-      <Typography.Muted> {t('description')} </Typography.Muted>
+        <Typography.H1> {t('title')} </Typography.H1>
 
-      <Button asChild>
-        <Link to='/'>
-          <ChevronLeft
-            className='-ms-1 opacity-60'
-            size={16}
-            aria-hidden='true'
-          />
-          <Typography.P className='text-sm'> {t('back')} </Typography.P>
-        </Link>
-      </Button>
-    </div>
+        <Typography.Muted> {t('description')} </Typography.Muted>
+
+        <Button asChild>
+          <Link to='/'>
+            <ChevronLeft
+              className='-ms-1 opacity-60'
+              size={16}
+              aria-hidden='true'
+            />
+            <Typography.P className='text-sm'> {t('back')} </Typography.P>
+          </Link>
+        </Button>
+      </div>
+    </>
   );
 };

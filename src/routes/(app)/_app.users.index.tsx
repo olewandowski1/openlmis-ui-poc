@@ -22,6 +22,8 @@ function UsersPage() {
 
   return (
     <>
+      <title> OpenLMIS - Users </title>
+
       <div className='p-3 md:p-4 flex flex-row items-center justify-start gap-2'>
         <div className='size-8 flex justify-center items-center rounded-md bg-gradient-to-br from-accent/60 to-accent'>
           <UsersRound size={18} />

@@ -22,7 +22,8 @@
       "passwordRequired": "Password is required",
       "usernamePlaceholder": "Enter your username",
       "passwordPlaceholder": "Enter your password"
-    }
+    },
+    "pageTitleLogin": "OpenLMIS - Login"
   },
   "app": {
     "ProtectedLayout": {
@@ -142,7 +143,16 @@
       "noUsersFound": "No users found.",
       "cancel": "Cancel",
       "saving": "Saving...",
-      "roleRemovedSuccess": "The role assignment has been successfully removed."
+      "roleRemovedSuccess": "The role assignment has been successfully removed.",
+      "referenceData": {
+        "error": {
+          "roleAssignment": {
+            "roleType": {
+              "notInAcceptableTypes": "Mismatch between role type. Some of the selected roles are not in appropriate role types."
+            }
+          }
+        }
+      }
     },
     "Users": {
       "username": "Username",

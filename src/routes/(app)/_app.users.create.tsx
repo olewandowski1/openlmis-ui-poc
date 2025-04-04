@@ -52,6 +52,8 @@ function CreateUserPage() {
 
   return (
     <>
+      <title> OpenLMIS - Create User </title>
+
       <div className='p-3 md:p-4 flex flex-row items-center justify-start gap-2'>
         <div className='size-8 flex justify-center items-center rounded-md bg-gradient-to-br from-accent/60 to-accent'>
           <User size={18} />

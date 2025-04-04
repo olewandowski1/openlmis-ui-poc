@@ -25,6 +25,8 @@ export const Route = createFileRoute('/(auth)/login')({
 function LoginPage() {
   return (
     <div className='flex flex-col items-center justify-center p-2 md:p-4 min-h-svh'>
+      <title> OpenLMIS - Login </title>
+
       <div className='w-full max-w-4xl'>
         <LoginForm />
       </div>

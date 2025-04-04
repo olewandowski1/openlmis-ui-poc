@@ -160,11 +160,18 @@ const RowActions: React.FC<{ item: User }> = ({ item }) => {
                 <span>{t('editUser')}</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Shield size={16} aria-hidden='true' />
-              <span>{t('managePermissions')}</span>
+            <DropdownMenuItem asChild>
+              <Link
+                to='/users/$userId/roles'
+                params={{ userId: item.id }}
+                // Default to the SUPERVISION tab
+                search={{ type: ALL_RIGHT_TYPES[0] }}
+              >
+                <Shield size={16} aria-hidden='true' />
+                <span>{t('managePermissions')}</span>
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => passwordModal.open(item.username)}>
               <LockKeyholeOpen size={16} aria-hidden='true' />
               <span>{t('resetPassword')}</span>
             </DropdownMenuItem>

@@ -26,10 +26,14 @@ function HomePage() {
   }
 
   return (
-    <div className='p-4'>
-      <Typography.H1>{t('systemName')}</Typography.H1>
-      <Typography.Muted> {t('explanation')} </Typography.Muted>
-      <HomePageDashboard />
-    </div>
+    <>
+      <title> OpenLMIS - Home </title>
+
+      <div className='p-4'>
+        <Typography.H1>{t('systemName')}</Typography.H1>
+        <Typography.Muted> {t('explanation')} </Typography.Muted>
+        <HomePageDashboard />
+      </div>
+    </>
   );
 }
