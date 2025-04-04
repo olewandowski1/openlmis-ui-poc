@@ -260,7 +260,9 @@
         }
       },
       "createUserSuccess": "User has been successfully created.",
-      "createUserError": "An error occurred while creating the user. Please try again."
+      "createUserError": "An error occurred while creating the user. Please try again.",
+      "emailPending": "Verification Pending",
+      "emailPendingInfo": "The {{email}} email address has not been verified yet and is pending verification. Please check your inbox for the verification link. It will expire in 24 hours."
     },
     "Roles": {
       "rolesSection": "Roles",

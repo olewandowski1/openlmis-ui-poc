@@ -5,6 +5,7 @@ import {
   UserAuthPasswordResetResponse,
   UserContactDetailsApiResponse,
   UserDetailsApiResponse,
+  UserEmailVerificationApiResponse,
   UsersApiResponse,
 } from '@/features/users/lib/types';
 import {
@@ -28,6 +29,17 @@ export const fetchUser = async (userId: string | null) => {
     ...apiUserContactDetailsResponse.data,
     ...apiUserAuthResponse.data,
   };
+};
+
+export const fetchUserEmailVerification = async (
+  userId: string | undefined
+) => {
+  const { data: apiUserVerificationEmail } =
+    await axiosInstance.get<UserEmailVerificationApiResponse>(
+      `/api/userContactDetails/${userId}/verifications`
+    );
+
+  return apiUserVerificationEmail;
 };
 
 export const fetchUsers = async () => {

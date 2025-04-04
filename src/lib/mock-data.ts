@@ -1,1 +1,1 @@
-export const SHOW_DEVTOOLS = true;
+export const SHOW_DEVTOOLS = false;

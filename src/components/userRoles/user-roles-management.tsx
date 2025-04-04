@@ -213,7 +213,6 @@ export const UserRolesManagement: React.FC<UserRolesManagementProps> = ({
         </ScrollArea>
         <Separator />
         {ALL_RIGHT_TYPES.map((typeValue) => {
-          // Tab Forms and Data Tables
           return (
             <TabsContent key={typeValue} value={typeValue}>
               <UserRolesTypeAddForm

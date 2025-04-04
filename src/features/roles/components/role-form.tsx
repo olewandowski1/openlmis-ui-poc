@@ -31,6 +31,7 @@ const rightObjectSchema = z.object({
 });
 
 // Ensure this schema's structure matches `baseRoleFormData`
+// It has to be split into two functions to allow for translations
 const getRoleSchema = (t: TFunction<'translation', 'app.Roles'>) => {
   return z.object({
     name: z

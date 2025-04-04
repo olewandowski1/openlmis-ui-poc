@@ -20,9 +20,12 @@ import { useMemo, useState } from 'react';
  * Items must have at least an 'id' (string) and a 'name' (string).
  */
 export type ComboboxItem = {
-  id: string; // Unique identifier, used as the value
-  name: string; // Text displayed and used for searching
-  code?: string; // Optional additional identifier
+  // Unique identifier, used as the value
+  id: string;
+  // Text displayed and used for searching
+  name: string;
+  // Optional additional identifier
+  code?: string;
 };
 
 /**
@@ -239,7 +242,7 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
             )}
           </div>
 
-          {/* Pagination Controls - Keep at bottom */}
+          {/* Pagination Controls */}
           {!isLoading && !isError && totalPages > 1 && (
             <div className='flex-shrink-0 flex items-center justify-between p-2 border-t'>
               <div className='text-sm text-muted-foreground overflow-hidden text-ellipsis whitespace-nowrap mr-2 min-w-0'>

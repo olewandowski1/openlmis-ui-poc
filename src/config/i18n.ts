@@ -12,13 +12,17 @@ i18n
   .use(initReactI18next)
   .init({
     supportedLngs: SUPPORTED_LANGUAGES,
-    fallbackLng: 'en', // Fallback if no language is detected
+    // Fallback if no language is detected
+    fallbackLng: 'en',
     debug: true,
 
     detection: {
-      order: ['localStorage', 'cookie', 'querystring', 'navigator', 'htmlTag'], // Language detection order
-      caches: ['localStorage', 'cookie'], // Enable caching in localStorage and cookies
-      cookieMinutes: 10080, // Cookie expiration time (7 days)
+      // Language detection order
+      order: ['localStorage', 'cookie', 'querystring', 'navigator', 'htmlTag'],
+      // Enable caching in localStorage and cookies
+      caches: ['localStorage', 'cookie'],
+      // Cookie expiration time (7 days)
+      cookieMinutes: 10080,
     },
 
     backend: {
@@ -26,7 +30,8 @@ i18n
     },
 
     interpolation: {
-      escapeValue: false, // React already escapes output
+      // React already escapes output
+      escapeValue: false,
     },
   });
 

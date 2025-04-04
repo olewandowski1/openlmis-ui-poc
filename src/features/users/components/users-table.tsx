@@ -203,7 +203,7 @@ export const UsersTable = () => {
                   </div>
                   <AlertDialogFooter>
                     <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
-                    // TODO: Implement delete functionality
+                    // TODO: Implement (bulk) delete functionality
                     <AlertDialogAction onClick={() => {}}>
                       {t('delete')}
                     </AlertDialogAction>

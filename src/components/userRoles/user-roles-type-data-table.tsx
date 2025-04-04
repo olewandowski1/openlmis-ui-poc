@@ -376,7 +376,7 @@ export const UserRolesTypeDataTable: React.FC<UserRolesTypeDataTableProps> = ({
         </Table>
       </div>
 
-      {/* --- Pagination (Keep existing logic, margin adjusted by parent div) --- */}
+      {/* Pagination */}
       {table.getRowModel().rows.length > 0 && (
         <div className='flex items-center justify-between gap-8'>
           {/* Page number information */}

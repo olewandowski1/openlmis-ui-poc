@@ -10,15 +10,17 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { Typography } from '@/components/ui/typography';
+import { useUserEmailVerification } from '@/features/users/hooks/use-user-email-verification';
 import { BaseUserFormData } from '@/features/users/lib/schemas';
 import { UserData } from '@/features/users/lib/types';
 import { useMinimalFacilities } from '@/hooks/use-minimal-facilities';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from '@tanstack/react-router';
 import { TFunction } from 'i18next';
-import { Loader2 } from 'lucide-react';
+import { InfoIcon, Loader2 } from 'lucide-react';
 import { useId } from 'react';
 import { UseFormReturn, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -26,7 +28,7 @@ import { z } from 'zod';
 
 // Ensure this schema's structure matches `baseUserFormSchema`
 // It has to be split into two functions to allow for translations
-export const schemaWithTranslations = (
+const schemaWithTranslations = (
   t: TFunction<'translation', 'app.Users'>,
   mode: 'create' | 'edit'
 ) => {
@@ -158,6 +160,9 @@ export const UserForm: React.FC<UserFormProps> = ({
     isError: isMinimalFacilitiesError,
   } = useMinimalFacilities();
 
+  const { userEmailVerification, isLoading: isEmailVerificationLoading } =
+    useUserEmailVerification(initialData?.id, mode);
+
   const allowNotificationsId = useId();
   const allowNotificationsDescId = `${allowNotificationsId}-description`;
   const emailVerifiedId = useId();
@@ -235,7 +240,10 @@ export const UserForm: React.FC<UserFormProps> = ({
                 <FormControl>
                   <Input
                     placeholder={t('emailPlaceholder')}
-                    disabled={isSubmitting}
+                    disabled={
+                      isSubmitting ||
+                      !!(mode === 'edit' && userEmailVerification?.emailAddress)
+                    }
                     {...field}
                   />
                 </FormControl>
@@ -244,6 +252,32 @@ export const UserForm: React.FC<UserFormProps> = ({
               </FormItem>
             )}
           />
+
+          {mode === 'edit' && userEmailVerification?.emailAddress && (
+            <div className='rounded-md border px-4 py-3'>
+              <div className='flex gap-3'>
+                <InfoIcon
+                  className='mt-0.5 shrink-0 text-blue-500 opacity-60'
+                  size={16}
+                  aria-hidden='true'
+                />
+                <div className='grow space-y-1'>
+                  <Typography.P className='text-sm font-medium'>
+                    {t('emailPending')}
+                  </Typography.P>
+                  {isEmailVerificationLoading ? (
+                    <Skeleton className='h-12 w-full' />
+                  ) : (
+                    <Typography.Small className='text-xs font-light leading-px'>
+                      {t('emailPendingInfo', {
+                        email: userEmailVerification?.emailAddress,
+                      })}
+                    </Typography.Small>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
           <FormField
             control={form.control}

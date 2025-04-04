@@ -7,4 +7,5 @@ export const queryKeys = {
   roleRights: 'roleRights',
   programs: 'programs',
   supervisoryNodes: 'supervisoryNodes',
+  userEmailVerification: 'userEmailVerification',
 };

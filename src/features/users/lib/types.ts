@@ -25,6 +25,12 @@ export type UserContactDetailsApiResponse = {
   };
 };
 
+export type UserEmailVerificationApiResponse = {
+  token: string;
+  emailAddress: string;
+  expiryDate: string;
+};
+
 export type UserAuthApiResponse = {
   id: string;
   username: string;
