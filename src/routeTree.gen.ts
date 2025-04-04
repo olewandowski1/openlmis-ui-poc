@@ -21,6 +21,7 @@ import { Route as appAppUsersIndexImport } from './routes/(app)/_app.users.index
 import { Route as appAppRolesIndexImport } from './routes/(app)/_app.roles.index'
 import { Route as appAppUsersCreateImport } from './routes/(app)/_app.users.create'
 import { Route as appAppRolesCreateImport } from './routes/(app)/_app.roles.create'
+import { Route as appAppUsersUserIdRolesImport } from './routes/(app)/_app.users.$userId.roles'
 import { Route as appAppUsersUserIdEditImport } from './routes/(app)/_app.users.$userId.edit'
 import { Route as appAppRolesTypeCreateImport } from './routes/(app)/_app.roles.type.create'
 import { Route as appAppRolesRoleIdEditImport } from './routes/(app)/_app.roles.$roleId.edit'
@@ -80,6 +81,12 @@ const appAppUsersCreateRoute = appAppUsersCreateImport.update({
 const appAppRolesCreateRoute = appAppRolesCreateImport.update({
   id: '/roles/create',
   path: '/roles/create',
+  getParentRoute: () => appAppRoute,
+} as any)
+
+const appAppUsersUserIdRolesRoute = appAppUsersUserIdRolesImport.update({
+  id: '/users/$userId/roles',
+  path: '/users/$userId/roles',
   getParentRoute: () => appAppRoute,
 } as any)
 
@@ -189,6 +196,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAppUsersUserIdEditImport
       parentRoute: typeof appAppImport
     }
+    '/(app)/_app/users/$userId/roles': {
+      id: '/(app)/_app/users/$userId/roles'
+      path: '/users/$userId/roles'
+      fullPath: '/users/$userId/roles'
+      preLoaderRoute: typeof appAppUsersUserIdRolesImport
+      parentRoute: typeof appAppImport
+    }
   }
 }
 
@@ -203,6 +217,7 @@ interface appAppRouteChildren {
   appAppRolesRoleIdEditRoute: typeof appAppRolesRoleIdEditRoute
   appAppRolesTypeCreateRoute: typeof appAppRolesTypeCreateRoute
   appAppUsersUserIdEditRoute: typeof appAppUsersUserIdEditRoute
+  appAppUsersUserIdRolesRoute: typeof appAppUsersUserIdRolesRoute
 }
 
 const appAppRouteChildren: appAppRouteChildren = {
@@ -214,6 +229,7 @@ const appAppRouteChildren: appAppRouteChildren = {
   appAppRolesRoleIdEditRoute: appAppRolesRoleIdEditRoute,
   appAppRolesTypeCreateRoute: appAppRolesTypeCreateRoute,
   appAppUsersUserIdEditRoute: appAppUsersUserIdEditRoute,
+  appAppUsersUserIdRolesRoute: appAppUsersUserIdRolesRoute,
 }
 
 const appAppRouteWithChildren =
@@ -240,6 +256,7 @@ export interface FileRoutesByFullPath {
   '/roles/$roleId/edit': typeof appAppRolesRoleIdEditRoute
   '/roles/type/create': typeof appAppRolesTypeCreateRoute
   '/users/$userId/edit': typeof appAppUsersUserIdEditRoute
+  '/users/$userId/roles': typeof appAppUsersUserIdRolesRoute
 }
 
 export interface FileRoutesByTo {
@@ -253,6 +270,7 @@ export interface FileRoutesByTo {
   '/roles/$roleId/edit': typeof appAppRolesRoleIdEditRoute
   '/roles/type/create': typeof appAppRolesTypeCreateRoute
   '/users/$userId/edit': typeof appAppUsersUserIdEditRoute
+  '/users/$userId/roles': typeof appAppUsersUserIdRolesRoute
 }
 
 export interface FileRoutesById {
@@ -269,6 +287,7 @@ export interface FileRoutesById {
   '/(app)/_app/roles/$roleId/edit': typeof appAppRolesRoleIdEditRoute
   '/(app)/_app/roles/type/create': typeof appAppRolesTypeCreateRoute
   '/(app)/_app/users/$userId/edit': typeof appAppUsersUserIdEditRoute
+  '/(app)/_app/users/$userId/roles': typeof appAppUsersUserIdRolesRoute
 }
 
 export interface FileRouteTypes {
@@ -284,6 +303,7 @@ export interface FileRouteTypes {
     | '/roles/$roleId/edit'
     | '/roles/type/create'
     | '/users/$userId/edit'
+    | '/users/$userId/roles'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -296,6 +316,7 @@ export interface FileRouteTypes {
     | '/roles/$roleId/edit'
     | '/roles/type/create'
     | '/users/$userId/edit'
+    | '/users/$userId/roles'
   id:
     | '__root__'
     | '/'
@@ -310,6 +331,7 @@ export interface FileRouteTypes {
     | '/(app)/_app/roles/$roleId/edit'
     | '/(app)/_app/roles/type/create'
     | '/(app)/_app/users/$userId/edit'
+    | '/(app)/_app/users/$userId/roles'
   fileRoutesById: FileRoutesById
 }
 
@@ -360,7 +382,8 @@ export const routeTree = rootRoute
         "/(app)/_app/users/",
         "/(app)/_app/roles/$roleId/edit",
         "/(app)/_app/roles/type/create",
-        "/(app)/_app/users/$userId/edit"
+        "/(app)/_app/users/$userId/edit",
+        "/(app)/_app/users/$userId/roles"
       ]
     },
     "/(auth)/login": {
@@ -396,6 +419,10 @@ export const routeTree = rootRoute
     },
     "/(app)/_app/users/$userId/edit": {
       "filePath": "(app)/_app.users.$userId.edit.tsx",
+      "parent": "/(app)/_app"
+    },
+    "/(app)/_app/users/$userId/roles": {
+      "filePath": "(app)/_app.users.$userId.roles.tsx",
       "parent": "/(app)/_app"
     }
   }

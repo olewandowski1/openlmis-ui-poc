@@ -67,6 +67,83 @@
       "systemName": "Sistema de Informação de Gestão Logística",
       "explanation": "Aqui está uma visão geral do sistema."
     },
+    "UserRoles": {
+      "home": "Início",
+      "users": "Usuários",
+      "manageUserRoles": "Gerenciar Funções do Usuário",
+      "roleAlreadyAssigned": "Esta função já está atribuída ao usuário.",
+      "cannotAddEmptyRole": "Não é possível adicionar uma atribuição de função vazia.",
+      "roleAdded": "Função adicionada com sucesso.",
+      "rightType": {
+        "SUPERVISION": "Supervisão",
+        "GENERAL_ADMIN": "Administração",
+        "REPORTS": "Relatórios",
+        "ORDER_FULFILLMENT": "Atendimento"
+      },
+      "savingButtonLoading": "Salvando...",
+      "saveButton": "Salvar Alterações",
+      "cancelButton": "Cancelar",
+      "updateUserSuccess": "Funções do usuário atualizadas com sucesso.",
+      "updateUserError": "Falha ao atualizar as funções do usuário. Por favor, tente novamente.",
+      "addRoleTitle": "Adicionar Atribuição de Função",
+      "addRoleDescription": "Você pode atribuir funções a um usuário. Duplicatas não são permitidas.",
+      "roleLabel": "Função",
+      "selectRolePlaceholder": "Selecionar Função...",
+      "searchRolePlaceholder": "Pesquisar funções...",
+      "selectUserPlaceholder": "Selecionar Usuário...",
+      "searchUserPlaceholder": "Pesquisar usuários...",
+      "noRolesFound": "Nenhuma função encontrada.",
+      "programLabel": "Programa",
+      "selectProgramPlaceholder": "Selecionar Programa...",
+      "searchProgramPlaceholder": "Pesquisar programas...",
+      "noProgramsFound": "Nenhum programa encontrado.",
+      "nodeLabel": "Nó Supervisor",
+      "selectNodePlaceholder": "Selecionar Nó Supervisor...",
+      "searchNodePlaceholder": "Pesquisar nós...",
+      "noNodesFound": "Nenhum nó encontrado.",
+      "facilityLabel": "Unidade Fornecedora",
+      "selectFacilityPlaceholder": "Selecionar Unidade Fornecedora...",
+      "searchFacilityPlaceholder": "Pesquisar unidades...",
+      "noFacilitiesFound": "Nenhuma unidade encontrada.",
+      "addRoleButton": "Adicionar Atribuição de Função",
+      "sortByDescending": "Ordenar decrescente",
+      "clearSort": "Limpar ordenação",
+      "sortByAscending": "Ordenar crescente",
+      "noRolesAssigned": "Nenhuma função atribuída para este tipo.",
+      "of": "de",
+      "goToPreviousPage": "Ir para a página anterior",
+      "goToNextPage": "Ir para a próxima página",
+      "errorMessages": {
+        "missingFields": "Por favor, preencha todos os campos obrigatórios para o tipo de função selecionado.",
+        "duplicateRoleAssignment": "Esta atribuição de função específica já existe para o usuário."
+      },
+      "searchBy": "Pesquisar por {{field}}",
+      "roleName": "Nome da Função",
+      "clearFilter": "Limpar filtro",
+      "columns": "Mostrar / Ocultar Colunas",
+      "programName": "Nome do Programa",
+      "supervisoryNodeName": "Nome do Nó Supervisor",
+      "warehouseName": "Nome da Unidade Fornecedora",
+      "noResults": "Sem resultados.",
+      "total": "Total",
+      "actions": "Ações",
+      "deleteRoleAssignment": "Excluir Atribuição de Função",
+      "role": "Função",
+      "program": "Programa",
+      "supervisoryNode": "Nó Supervisor",
+      "supplyingFacility": "Unidade Fornecedora",
+      "importRolesSuccess": "Funções importadas com sucesso.",
+      "importRolesError": "Falha ao importar funções. Por favor, tente novamente.",
+      "noUserSelectedError": "Por favor, selecione um usuário para importar funções.",
+      "importRoles": "Importar Funções",
+      "importRolesDescription": "Selecione um usuário para importar suas atribuições de função.",
+      "modalWorkInfo": "Se você escolher o usuário, todas as suas funções serão importadas e mescladas com as funções do usuário editado. Funções existentes não serão ignoradas.",
+      "usersSelect": "Usuário para importar de",
+      "noUsersFound": "Nenhum usuário encontrado.",
+      "cancel": "Cancelar",
+      "saving": "Salvando...",
+      "roleRemovedSuccess": "A atribuição de função foi removida com sucesso."
+    },
     "Users": {
       "username": "Nome de usuário",
       "firstName": "Primeiro Nome",
@@ -168,10 +245,20 @@
           }
         }
       },
+      "notification": {
+        "error": {
+          "userContactDetails": {
+            "email": {
+              "duplicated": "E-mail já existe. Por favor, insira um endereço de e-mail diferente."
+            }
+          }
+        }
+      },
       "users": {
         "passwordReset": {
           "tooWeak": "A senha é muito fraca. Por favor, insira uma senha mais forte. NOTA: O usuário pode ter sido criado. Use 'Redefinir Senha' para definir uma nova senha.",
-          "notContainNumber": "A senha deve conter pelo menos um número."
+          "notContainNumber": "A senha deve conter pelo menos um número.",
+          "containUserDetails": "A senha não pode conter detalhes do usuário."
         }
       }
     },

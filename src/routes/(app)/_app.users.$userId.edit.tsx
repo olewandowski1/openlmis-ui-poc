@@ -13,6 +13,7 @@ import {
   useNavigate,
   useParams,
 } from '@tanstack/react-router';
+import { AxiosError } from 'axios';
 import { User } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
@@ -40,8 +41,18 @@ function EditUserPage() {
       toast.success(t('updateUserSuccess'));
       navigate({ to: '/users' });
     },
-    onError: () => {
-      toast.error(t('updateUserError'));
+    onError: (error) => {
+      const axiosError = error as AxiosError;
+      const axiosResponseData = axiosError.response?.data as {
+        messageKey: string;
+        message: string;
+      };
+
+      if (axiosError.status === 400 && axiosResponseData?.messageKey) {
+        toast.error(t(axiosResponseData.messageKey));
+      } else {
+        toast.error(t('updateUserError'));
+      }
     },
   });
 

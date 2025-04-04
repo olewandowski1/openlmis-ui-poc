@@ -6,6 +6,7 @@ export const useUsers = () => {
   const { data, isLoading } = useQuery({
     queryKey: [queryKeys.users],
     queryFn: () => fetchUsers(),
+    staleTime: 1000 * 60 * 10,
   });
 
   const users = data?.content ?? [];

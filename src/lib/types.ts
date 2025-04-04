@@ -1,5 +1,10 @@
 import { ALL_RIGHT_TYPES } from '@/lib/constants';
 
+type ApiReference = {
+  id: string;
+  href: string;
+};
+
 export interface SortInfo {
   direction: string;
   property: string;
@@ -49,6 +54,18 @@ export type Role = {
   count: number;
 };
 
+export type Program = {
+  active: boolean;
+  code: string;
+  description: string | null;
+  enableDatePhysicalStockCountCompleted: boolean;
+  id: string;
+  name: string;
+  periodsSkippable: boolean;
+  showNonFullSupplyTab: boolean;
+  skipAuthorization: boolean;
+};
+
 export type User = {
   id: string;
   username: string;
@@ -57,7 +74,7 @@ export type User = {
   timezone: string;
   active: boolean;
   extraData: Record<string, unknown>;
-  roleAssignments: Role[];
+  roleAssignments: RoleAssignment[];
 };
 
 export type MinimalFacility = {
@@ -65,4 +82,29 @@ export type MinimalFacility = {
   id: string;
   name: string;
   code: string;
+};
+
+export type RoleAssignment = {
+  count?: number;
+  errors?: unknown[];
+  roleId: string;
+  roleName?: string;
+  warehouseId?: string;
+  warehouseName?: string;
+  supervisoryNodeId?: string;
+  supervisoryNodeName?: string;
+  programId?: string;
+  programName?: string;
+  rights?: Right[];
+};
+
+export type SupervisoryNode = {
+  id: string;
+  code: string;
+  facility: ApiReference;
+  name: string;
+  extraData: Record<string, unknown>;
+  childNodes: ApiReference[];
+  partnerNodes: ApiReference[];
+  requisitionGroup: ApiReference;
 };

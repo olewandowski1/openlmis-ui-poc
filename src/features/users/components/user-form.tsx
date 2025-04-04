@@ -25,7 +25,8 @@ import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 // Ensure this schema's structure matches `baseUserFormSchema`
-const schemaWithTranslations = (
+// It has to be split into two functions to allow for translations
+export const schemaWithTranslations = (
   t: TFunction<'translation', 'app.Users'>,
   mode: 'create' | 'edit'
 ) => {
@@ -34,16 +35,19 @@ const schemaWithTranslations = (
       .string()
       .min(1, { message: t('usernameRequired') })
       .max(255, { message: t('maxLengthExceeded', { max: 255 }) }),
-    email: z
-      .string()
-      .refine(
-        (val) => val === '' || z.string().email().safeParse(val).success,
-        {
-          message: t('emailInvalid'),
-        }
-      )
-      .optional()
-      .or(z.literal('')),
+    emailDetails: z.object({
+      email: z
+        .string()
+        .refine(
+          (val) => val === '' || z.string().email().safeParse(val).success,
+          {
+            message: t('emailInvalid'),
+          }
+        )
+        .optional()
+        .or(z.literal('')),
+      emailVerified: z.boolean().optional(),
+    }),
     firstName: z
       .string()
       .min(1, { message: t('firstNameRequired') })
@@ -64,7 +68,6 @@ const schemaWithTranslations = (
       .or(z.literal('')),
     enabled: z.boolean(),
     allowNotifications: z.boolean().optional(),
-    emailVerified: z.boolean(),
     timezone: z.string().optional(),
     password: z
       .string()
@@ -87,6 +90,21 @@ const schemaWithTranslations = (
         }
       ),
     homeFacilityId: z.string().optional().or(z.literal('')),
+    roleAssignments: z
+      .array(
+        z.object({
+          roleId: z.string(),
+          roleName: z.string().optional(),
+          type: z.string().optional(),
+          warehouseId: z.string().optional(),
+          warehouseName: z.string().optional(),
+          supervisoryNodeId: z.string().optional(),
+          supervisoryNodeName: z.string().optional(),
+          programId: z.string().optional(),
+          programName: z.string().optional(),
+        })
+      )
+      .optional(),
   });
 };
 
@@ -114,14 +132,16 @@ export const UserForm: React.FC<UserFormProps> = ({
       resolver: zodResolver(userSchema),
       defaultValues: {
         username: initialData?.username ?? '',
-        email: initialData?.emailDetails?.email ?? '',
+        emailDetails: {
+          email: initialData?.emailDetails?.email ?? '',
+          emailVerified: initialData?.emailDetails?.emailVerified ?? false,
+        },
         firstName: initialData?.firstName ?? '',
         lastName: initialData?.lastName ?? '',
         jobTitle: initialData?.jobTitle ?? '',
         phoneNumber: initialData?.phoneNumber ?? '',
         enabled: initialData?.enabled ?? true,
         allowNotifications: initialData?.allowNotify ?? false,
-        emailVerified: initialData?.emailDetails?.emailVerified ?? false,
         timezone: initialData?.timezone ?? '',
         password: '',
         homeFacilityId: initialData?.homeFacilityId ?? '',
@@ -133,7 +153,7 @@ export const UserForm: React.FC<UserFormProps> = ({
   };
 
   const {
-    data: minimalFacilities,
+    minimalFacilities,
     isLoading: isMinimalFacilitiesLoading,
     isError: isMinimalFacilitiesError,
   } = useMinimalFacilities();
@@ -206,7 +226,7 @@ export const UserForm: React.FC<UserFormProps> = ({
 
           <FormField
             control={form.control}
-            name='email'
+            name='emailDetails.email'
             render={({ field }) => (
               <FormItem>
                 <FormLabel className='flex items-center justify-between h-5'>
@@ -227,7 +247,7 @@ export const UserForm: React.FC<UserFormProps> = ({
 
           <FormField
             control={form.control}
-            name='emailVerified'
+            name='emailDetails.emailVerified'
             render={({ field }) => (
               <FormItem className='flex flex-row items-center justify-between rounded-lg border p-2'>
                 <div className='space-y-0.5'>
@@ -412,8 +432,8 @@ export const UserForm: React.FC<UserFormProps> = ({
                       aria-describedby={allowNotificationsDescId}
                       disabled={
                         isSubmitting ||
-                        !form.getValues('emailVerified') ||
-                        !form.getValues('email')
+                        !form.getValues('emailDetails.emailVerified') ||
+                        !form.getValues('emailDetails.email')
                       }
                     />
                   </FormControl>
@@ -432,7 +452,7 @@ export const UserForm: React.FC<UserFormProps> = ({
                 </FormLabel>
                 <FormControl>
                   <PaginatedCombobox
-                    items={minimalFacilities?.content ?? []}
+                    items={minimalFacilities ?? []}
                     value={field.value}
                     onChange={field.onChange}
                     isLoading={isMinimalFacilitiesLoading}

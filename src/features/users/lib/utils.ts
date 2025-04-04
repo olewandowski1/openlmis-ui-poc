@@ -20,17 +20,14 @@ export const createUserUpdatePayload = (
     timezone: data.timezone,
     active: data?.enabled,
     extraData: {},
-    roleAssignments: [],
+    roleAssignments: data?.roleAssignments ?? [],
   };
 
   const userContactDetailsPayload: Partial<UserContactDetailsApiResponse> = {
     referenceDataUserId: userId,
     phoneNumber: data.phoneNumber,
     allowNotify: data.allowNotifications,
-    emailDetails: {
-      email: data?.email ?? null,
-      emailVerified: data.emailVerified,
-    },
+    emailDetails: data.emailDetails,
   };
 
   const userAuthPayload: Partial<UserAuthApiResponse> = {
@@ -68,10 +65,7 @@ export const createUserCreatePayload = (
     phoneNumber: data.phoneNumber,
     allowNotify: data.allowNotifications,
     referenceDataUserId: userId,
-    emailDetails: {
-      email: data?.email ?? null,
-      emailVerified: data.emailVerified,
-    },
+    emailDetails: data.emailDetails,
   };
 
   const userAuthPayload: Partial<UserAuthApiResponse> = {

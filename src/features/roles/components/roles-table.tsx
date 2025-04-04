@@ -124,6 +124,7 @@ export const RolesTable = () => {
                 placeholder={t('searchByRoleName')}
                 type='text'
                 aria-label={t('searchByRoleName')}
+                disabled={isLoading}
               />
               <div className='absolute inset-y-0 flex items-center justify-center pointer-events-none start-0 ps-2 text-muted-foreground/60 peer-disabled:opacity-50'>
                 <ShieldCheck size={16} aria-hidden='true' />{' '}

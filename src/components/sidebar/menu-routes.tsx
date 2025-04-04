@@ -72,7 +72,7 @@ export const MenuRoutes = () => {
                     <SidebarMenuSubItem key={item.key}>
                       <SidebarMenuSubButton
                         asChild
-                        isActive={pathname.includes(item.href)}
+                        isActive={pathname.split('/')[1].includes(item.key)}
                       >
                         <Link to={`${item.href}`}>{t(item.key)}</Link>
                       </SidebarMenuSubButton>

@@ -7,6 +7,8 @@ export const useRoles = () => {
   const { data, isLoading } = useQuery({
     queryKey: [queryKeys.roles],
     queryFn: () => fetchRoles(),
+    // Stale time is 1 hour - since roles are not expected to change often.
+    staleTime: 1000 * 60 * 60,
   });
 
   const roles: Role[] = data ?? [];

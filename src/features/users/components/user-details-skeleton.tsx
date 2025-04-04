@@ -97,8 +97,8 @@ export const UserDetailsSkeleton = () => {
 
           {/* Buttons */}
           <div className='md:col-span-2 flex flex-col gap-2 lg:flex-row-reverse mt-4'>
-            <Skeleton className='h-10 w-full lg:w-auto lg:flex-1' />{' '}
-            <Skeleton className='h-10 w-full lg:w-auto lg:flex-1' />{' '}
+            <Skeleton className='h-10 w-full lg:w-auto lg:flex-1' />
+            <Skeleton className='h-10 w-full lg:w-auto lg:flex-1' />
           </div>
         </div>
       </div>

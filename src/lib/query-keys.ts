@@ -5,4 +5,6 @@ export const queryKeys = {
   roles: 'roles',
   role: 'role',
   roleRights: 'roleRights',
+  programs: 'programs',
+  supervisoryNodes: 'supervisoryNodes',
 };

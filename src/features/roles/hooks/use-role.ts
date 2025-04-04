@@ -8,6 +8,7 @@ export const useRole = (roleId: string) => {
     enabled: !!roleId,
     queryKey: [queryKeys.role, roleId],
     queryFn: () => fetchRole(roleId),
+    staleTime: 1000 * 60 * 10,
   });
 
   return { role, isLoading };

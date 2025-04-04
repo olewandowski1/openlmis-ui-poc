@@ -138,6 +138,7 @@ export const UsersTable = () => {
                 placeholder={t('searchByUsername')}
                 type='text'
                 aria-label={t('searchByUsername')}
+                disabled={isLoading}
               />
               <div className='absolute inset-y-0 flex items-center justify-center pointer-events-none start-0 ps-2 text-muted-foreground/60 peer-disabled:opacity-50'>
                 <UserSearch size={16} aria-hidden='true' />
@@ -224,7 +225,11 @@ export const UsersTable = () => {
                   </Typography.P>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align='end' sideOffset={4} className='w-(--radix-dropdown-menu-trigger-width)'>
+              <DropdownMenuContent
+                align='end'
+                sideOffset={4}
+                className='w-(--radix-dropdown-menu-trigger-width)'
+              >
                 {table
                   .getAllColumns()
                   .filter((column) => column.getCanHide())

@@ -67,6 +67,83 @@
       "systemName": "Logistics Management Information System",
       "explanation": "Here's an overview of the system."
     },
+    "UserRoles": {
+      "home": "Home",
+      "users": "Users",
+      "manageUserRoles": "Manage User Roles",
+      "roleAlreadyAssigned": "This role is already assigned to the user.",
+      "cannotAddEmptyRole": "Cannot add an empty role assignment.",
+      "roleAdded": "Role successfully added.",
+      "rightType": {
+        "SUPERVISION": "Supervision",
+        "GENERAL_ADMIN": "Administration",
+        "REPORTS": "Reports",
+        "ORDER_FULFILLMENT": "Fulfillment"
+      },
+      "savingButtonLoading": "Saving...",
+      "saveButton": "Save Changes",
+      "cancelButton": "Cancel",
+      "updateUserSuccess": "User roles updated successfully.",
+      "updateUserError": "Failed to update user roles. Please try again.",
+      "addRoleTitle": "Add Role Assignment",
+      "addRoleDescription": "You can assign roles to a user. Duplicates are not allowed.",
+      "roleLabel": "Role",
+      "selectRolePlaceholder": "Select Role...",
+      "searchRolePlaceholder": "Search roles...",
+      "selectUserPlaceholder": "Select User...",
+      "searchUserPlaceholder": "Search users...",
+      "noRolesFound": "No roles found.",
+      "programLabel": "Program",
+      "selectProgramPlaceholder": "Select Program...",
+      "searchProgramPlaceholder": "Search programs...",
+      "noProgramsFound": "No programs found.",
+      "nodeLabel": "Supervisory Node",
+      "selectNodePlaceholder": "Select Supervisory Node...",
+      "searchNodePlaceholder": "Search nodes...",
+      "noNodesFound": "No nodes found.",
+      "facilityLabel": "Supplying Facility",
+      "selectFacilityPlaceholder": "Select Supplying Facility...",
+      "searchFacilityPlaceholder": "Search facilities...",
+      "noFacilitiesFound": "No facilities found.",
+      "addRoleButton": "Add Role Assignment",
+      "sortByDescending": "Sort descending",
+      "clearSort": "Clear sort",
+      "sortByAscending": "Sort ascending",
+      "noRolesAssigned": "No roles assigned for this type.",
+      "of": "of",
+      "goToPreviousPage": "Go to previous page",
+      "goToNextPage": "Go to next page",
+      "errorMessages": {
+        "missingFields": "Please fill in all required fields for the selected role type.",
+        "duplicateRoleAssignment": "This specific role assignment already exists for the user."
+      },
+      "searchBy": "Search by {{field}}",
+      "roleName": "Role Name",
+      "clearFilter": "Clear filter",
+      "columns": "Show / Hide Columns",
+      "programName": "Program Name",
+      "supervisoryNodeName": "Supervisory Node Name",
+      "warehouseName": "Supplying Facility Name",
+      "noResults": "No results found.",
+      "total": "Total",
+      "actions": "Actions",
+      "deleteRoleAssignment": "Delete Role Assignment",
+      "role": "Role",
+      "program": "Program",
+      "supervisoryNode": "Supervisory Node",
+      "supplyingFacility": "Supplying Facility",
+      "importRolesSuccess": "Roles imported successfully.",
+      "importRolesError": "Failed to import roles. Please try again.",
+      "noUserSelectedError": "Please select a user to import roles from.",
+      "importRoles": "Import Roles",
+      "importRolesDescription": "Select a user to import their role assignments.",
+      "modalWorkInfo": "If you choose the user, all their roles will be imported and merged with the edited user's roles. Existing roles will not be skipped.",
+      "usersSelect": "User to import from",
+      "noUsersFound": "No users found.",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "roleRemovedSuccess": "The role assignment has been successfully removed."
+    },
     "Users": {
       "username": "Username",
       "firstName": "First Name",
@@ -166,10 +243,20 @@
           }
         }
       },
+      "notification": {
+        "error": {
+          "userContactDetails": {
+            "email": {
+              "duplicated": "Email already exists. Please enter a different email address."
+            }
+          }
+        }
+      },
       "users": {
         "passwordReset": {
           "tooWeak": "Password is too weak. Please enter a stronger password. NOTE: User might be created. Use the 'Reset Password' to set a new password.",
-          "notContainNumber": "Password must contain at least one number."
+          "notContainNumber": "Password must contain at least one number.",
+          "containUserDetails": "Password should not contain user details."
         }
       },
       "createUserSuccess": "User has been successfully created.",

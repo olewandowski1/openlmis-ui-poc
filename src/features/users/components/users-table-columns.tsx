@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/tooltip';
 import { usePasswordModal } from '@/features/users/store/password-modal';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ALL_RIGHT_TYPES } from '@/lib/constants';
 import { User } from '@/lib/types';
 import { Link } from '@tanstack/react-router';
 import { ColumnDef, FilterFn } from '@tanstack/react-table';
@@ -201,12 +202,20 @@ const RowActions: React.FC<{ item: User }> = ({ item }) => {
             size='icon'
             variant='outline'
             aria-label={t('managePermissions')}
+            asChild
           >
-            <Shield
-              className='text-muted-foreground/80'
-              size={16}
-              aria-hidden='true'
-            />
+            <Link
+              to='/users/$userId/roles'
+              params={{ userId: item.id }}
+              // Default to the SUPERVISION tab
+              search={{ type: ALL_RIGHT_TYPES[0] }}
+            >
+              <Shield
+                className='text-muted-foreground/80'
+                size={16}
+                aria-hidden='true'
+              />
+            </Link>
           </Button>
         </TooltipTrigger>
         <TooltipContent className='px-2 py-1 text-sm'>

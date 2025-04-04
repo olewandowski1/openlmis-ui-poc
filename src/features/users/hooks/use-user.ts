@@ -4,7 +4,7 @@ import { UserData } from '@/features/users/lib/types';
 import { queryKeys } from '@/lib/query-keys';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
-export const useUser = (userId: string) => {
+export const useUser = (userId: string | null) => {
   const { data: user, isLoading } = useQuery<UserData, Error>({
     enabled: !!userId,
     queryKey: [queryKeys.user, userId],

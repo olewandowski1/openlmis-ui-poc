@@ -138,7 +138,7 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
   const effectiveValue = value ?? '';
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal={true}>
       <PopoverTrigger asChild>
         <Button
           id={id}
@@ -174,9 +174,9 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
         side='top'
         style={{ width: 'var(--radix-popover-trigger-width)' }}
       >
-        <div className='flex flex-col max-h-[--radix-popover-content-available-height]'>
+        <div className='flex flex-col max-h-(--radix-popover-content-available-height)'>
           {/* Search Input */}
-          <div className='flex-shrink-0 p-2 border-b border-border'>
+          <div className='flex-shrink-0 p-0.5 border-b border-border'>
             <Input
               placeholder={searchText}
               value={searchTerm}

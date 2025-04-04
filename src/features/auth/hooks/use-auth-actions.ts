@@ -77,7 +77,7 @@ export const useAuthActions = (): AuthActions => {
 
       toast.success(t('loginSuccess'));
     } catch (error) {
-      console.error(error);
+      console.error(`[USE_AUTH_ACTIONS]: ${error}`);
       toast.error(t('loginError'));
     }
   };
@@ -87,7 +87,7 @@ export const useAuthActions = (): AuthActions => {
       await axiosInstance.post('/api/users/auth/logout');
       clearLoginData();
     } catch (error) {
-      console.error(error);
+      console.error(`[USE_AUTH_ACTIONS]: ${error}`);
       toast.error(t('logoutError'));
     }
   };

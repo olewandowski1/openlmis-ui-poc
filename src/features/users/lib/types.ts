@@ -1,4 +1,4 @@
-import { PaginatedResponse, User } from '@/lib/types';
+import { PaginatedResponse, RoleAssignment, User } from '@/lib/types';
 
 export type UsersApiResponse = PaginatedResponse<User>;
 
@@ -11,10 +11,8 @@ export type UserDetailsApiResponse = {
   jobTitle?: string;
   homeFacilityId?: string;
   active: boolean;
-  extraData: { [key: string]: unknown };
-  roleAssignments: {
-    roleId: string;
-  }[];
+  extraData: Record<string, unknown>;
+  roleAssignments: RoleAssignment[];
 };
 
 export type UserContactDetailsApiResponse = {
@@ -22,8 +20,8 @@ export type UserContactDetailsApiResponse = {
   phoneNumber: string | null;
   allowNotify: boolean;
   emailDetails: {
-    email: string | null;
-    emailVerified: boolean;
+    email?: string | undefined;
+    emailVerified?: boolean | undefined;
   };
 };
 

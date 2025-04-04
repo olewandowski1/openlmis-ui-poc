@@ -2,7 +2,7 @@ import { axiosInstance } from '@/config/axios';
 import { BaseRoleFormData } from '@/features/roles/lib/schemas';
 import { Right, RightType, Role } from '@/lib/types';
 
-type RolesApiResponse = Role[];
+export type RolesApiResponse = Role[];
 
 export const fetchRoles = async () => {
   const { data: apiRolesResponse } =
