@@ -61,9 +61,9 @@ type UserRolesTypeDataTableProps = {
   currentRoleAssignments: RoleAssignment[];
   onRemoveRole: (roleAssignmentToRemove: RoleAssignment) => void;
   availableRoles: Role[];
-  programs: Program[];
-  supervisoryNodes: SupervisoryNode[];
-  supplyingFacilities: MinimalFacility[];
+  programs?: Program[];
+  supervisoryNodes?: SupervisoryNode[];
+  supplyingFacilities?: MinimalFacility[];
   isMutationSubmitting: boolean;
 };
 
@@ -117,11 +117,11 @@ export const UserRolesTypeDataTable: React.FC<UserRolesTypeDataTableProps> = ({
   const roleAssignmentsToDisplay = useMemo(() => {
     const roleMap = new Map(availableRoles.map((role) => [role.id, role]));
     const programMap = new Map(
-      programs.map((program) => [program.id, program])
+      programs?.map((program) => [program.id, program])
     );
-    const nodeMap = new Map(supervisoryNodes.map((node) => [node.id, node]));
+    const nodeMap = new Map(supervisoryNodes?.map((node) => [node.id, node]));
     const facilityMap = new Map(
-      supplyingFacilities.map((facility) => [facility.id, facility])
+      supplyingFacilities?.map((facility) => [facility.id, facility])
     );
 
     return filteredCurrentRoleAssignments.map((roleAssignment) => {
@@ -188,7 +188,7 @@ export const UserRolesTypeDataTable: React.FC<UserRolesTypeDataTableProps> = ({
 
   return (
     <div className='space-y-2'>
-      <div className='flex flex-col md:flex-row md:justify-between w-full gap-2 py-2 md:py-0'>
+      <div className='flex flex-col w-full gap-2 py-2 md:flex-row md:justify-between md:py-0'>
         {/* Search Input */}
         <div className='relative flex-1 md:grow-0'>
           <Input
@@ -227,7 +227,7 @@ export const UserRolesTypeDataTable: React.FC<UserRolesTypeDataTableProps> = ({
         </div>
 
         {/* Column Visibility Dropdown */}
-        <div className='flex items-center flex-col md:flex-row gap-2'>
+        <div className='flex flex-col items-center gap-2 md:flex-row'>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant='outline' className='flex-1 w-full md:w-auto'>
@@ -268,7 +268,7 @@ export const UserRolesTypeDataTable: React.FC<UserRolesTypeDataTableProps> = ({
         </div>
       </div>
 
-      <div className='bg-background overflow-hidden rounded-md border'>
+      <div className='overflow-hidden border rounded-md bg-background'>
         <Table className='table-fixed'>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -380,9 +380,9 @@ export const UserRolesTypeDataTable: React.FC<UserRolesTypeDataTableProps> = ({
       {table.getRowModel().rows.length > 0 && (
         <div className='flex items-center justify-between gap-8'>
           {/* Page number information */}
-          <div className='text-muted-foreground flex grow justify-end text-sm whitespace-nowrap'>
+          <div className='flex justify-end text-sm text-muted-foreground grow whitespace-nowrap'>
             <p
-              className='text-muted-foreground text-sm whitespace-nowrap'
+              className='text-sm text-muted-foreground whitespace-nowrap'
               aria-live='polite'
             >
               <span className='text-foreground'>

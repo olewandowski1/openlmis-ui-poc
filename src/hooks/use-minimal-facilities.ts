@@ -1,4 +1,5 @@
 import { fetchMinimalFacilities } from '@/lib/api';
+import { DEFAULT_REACT_QUERY_OPTIONS } from '@/lib/constants';
 import { queryKeys } from '@/lib/query-keys';
 import { useQuery } from '@tanstack/react-query';
 
@@ -6,10 +7,10 @@ export const useMinimalFacilities = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: [queryKeys.minimalFacilities],
     queryFn: fetchMinimalFacilities,
-    staleTime: 1000 * 60 * 10,
+    ...DEFAULT_REACT_QUERY_OPTIONS,
   });
 
-  const minimalFacilities = data?.content ?? [];
+  const minimalFacilities = data?.content;
 
   return { minimalFacilities, isLoading, isError };
 };

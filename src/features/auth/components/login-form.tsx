@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import { useAuthActions } from '@/features/auth/hooks/use-auth-actions';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -103,12 +104,13 @@ export const LoginForm = () => {
 
                           <span className='ml-1 text-destructive'>*</span>
                         </Typography.P>
-                        <a
+                        {/* TODO: Uncomment when forgot password implemented */}
+                        {/* <a
                           href='#'
                           className='ml-auto text-sm underline-offset-2 hover:underline text-muted-foreground'
                         >
                           {t('forgotPassword')}
-                        </a>
+                        </a> */}
                       </FormLabel>
                       <FormControl className='relative'>
                         <Input
@@ -153,18 +155,26 @@ export const LoginForm = () => {
                 </div>
               </div>
             </form>
-            <div className='relative hidden md:block'>
+            <div className='relative hidden md:block bg-primary/5'>
               <img
-                src='/placeholder.svg'
-                alt='Image'
-                className='absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale'
+                src='/olmis.png'
+                alt='OpenLMIS Logo'
+                className='absolute inset-0 object-cover top-[40%] translate-y-[-50%] right-0 left-0 m-auto'
               />
             </div>
           </Form>
         </CardContent>
       </Card>
       <div className='text-balance italic text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary'>
-        {t('poweredBy')} <a href='#'>{t('appName')}</a>.
+        {t('poweredBy')}{' '}
+        <a
+          target='_blank'
+          rel='noopener noreferrer'
+          href='https://openlmis.org/'
+        >
+          {t('appName')}
+        </a>
+        .
       </div>
     </div>
   );

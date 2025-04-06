@@ -59,7 +59,7 @@ import {
   UserSearch,
   X,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const UsersTable = () => {
@@ -84,8 +84,10 @@ export const UsersTable = () => {
 
   const columns = useCreateColumns();
 
+  const usersData = useMemo(() => users ?? [], [users]);
+
   const table = useReactTable({
-    data: users,
+    data: usersData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -117,7 +119,7 @@ export const UsersTable = () => {
   return (
     <>
       <div className='space-y-4'>
-        <div className='flex flex-col md:flex-row md:justify-between w-full gap-3 py-2 md:py-0'>
+        <div className='flex flex-col w-full gap-3 py-2 md:flex-row md:justify-between md:py-0'>
           <div className='flex items-center gap-3'>
             <div className='relative flex-1'>
               <Input
@@ -159,12 +161,12 @@ export const UsersTable = () => {
               )}
             </div>
           </div>
-          <div className='flex flex-col md:flex-row items-center gap-3'>
+          <div className='flex flex-col items-center gap-3 md:flex-row'>
             {table.getSelectedRowModel().rows.length > 0 && (
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button
-                    className='ml-0 md:ml-auto flex-1 w-full'
+                    className='flex-1 w-full ml-0 md:ml-auto'
                     variant='outline'
                   >
                     <Trash
@@ -203,7 +205,6 @@ export const UsersTable = () => {
                   </div>
                   <AlertDialogFooter>
                     <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
-                    {/* TODO: Implement (bulk) delete functionality */}
                     <AlertDialogAction onClick={() => {}}>
                       {t('delete')}
                     </AlertDialogAction>
@@ -265,7 +266,6 @@ export const UsersTable = () => {
         <Table className='table-fixed border-separate border-spacing-0 [&_tr:not(:last-child)_td]:border-b'>
           <tbody aria-hidden='true' className='table-row h-1'></tbody>
 
-          {/* Table Columns */}
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className='hover:bg-transparent'>
@@ -273,7 +273,7 @@ export const UsersTable = () => {
                   <TableHead
                     key={header.id}
                     style={{ width: `${header.getSize()}px` }}
-                    className='relative select-none h-10 bg-sidebar border-y border-border first:border-l first:rounded-l-sm last:border-r last:rounded-r-sm'
+                    className='relative h-10 select-none bg-sidebar border-y border-border first:border-l first:rounded-l-sm last:border-r last:rounded-r-sm'
                   >
                     {header.isPlaceholder ? null : header.column.getCanSort() ? (
                       <div
@@ -326,7 +326,6 @@ export const UsersTable = () => {
             ))}
           </TableHeader>
 
-          {/* Table Rows */}
           <TableBody>
             {showTableResults &&
               table.getRowModel().rows.map((row) => (
@@ -348,7 +347,6 @@ export const UsersTable = () => {
           </TableBody>
         </Table>
 
-        {/* Loading / No Results State */}
         {(isLoading || showNoResults) && (
           <div className='flex flex-col items-center gap-1'>
             {isLoading ? (
@@ -362,7 +360,6 @@ export const UsersTable = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {table.getRowModel().rows.length > 0 && (
           <div className='flex items-center justify-between gap-3'>
             <Typography.P

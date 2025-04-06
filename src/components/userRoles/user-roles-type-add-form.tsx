@@ -20,15 +20,15 @@ type UserRolesTypeAddFormProps = {
   currentType: RightType;
   availableRoles: Role[];
   onAddRole: (roleAssignment: RoleAssignment) => Promise<void>;
-  programs: Program[];
-  supervisoryNodes: SupervisoryNode[];
-  supplyingFacilities: MinimalFacility[];
+  programs?: Program[];
+  supervisoryNodes?: SupervisoryNode[];
+  supplyingFacilities?: MinimalFacility[];
 };
 
 const adaptToComboboxItem = <T extends { id: string; name: string }>(
-  items: T[]
-): ComboboxItem[] => {
-  return items.map((item) => ({ id: item.id, name: item.name }));
+  items?: T[]
+): ComboboxItem[] | undefined => {
+  return items?.map((item) => ({ id: item.id, name: item.name }));
 };
 
 export const UserRolesTypeAddForm: React.FC<UserRolesTypeAddFormProps> = ({

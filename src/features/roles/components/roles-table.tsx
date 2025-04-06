@@ -47,7 +47,7 @@ import {
   ShieldCheck,
   X,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const RolesTable = () => {
@@ -72,8 +72,10 @@ export const RolesTable = () => {
 
   const columns = useCreateColumns();
 
+  const rolesData = useMemo(() => roles ?? [], [roles]);
+
   const table = useReactTable({
-    data: roles,
+    data: rolesData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -105,7 +107,7 @@ export const RolesTable = () => {
   return (
     <>
       <div className='space-y-4'>
-        <div className='flex flex-col md:flex-row md:justify-between w-full gap-3 py-2 md:py-0'>
+        <div className='flex flex-col w-full gap-3 py-2 md:flex-row md:justify-between md:py-0'>
           <div className='flex items-center gap-3'>
             <div className='relative flex-1'>
               <Input
@@ -145,7 +147,7 @@ export const RolesTable = () => {
               )}
             </div>
           </div>
-          <div className='flex flex-col md:flex-row items-center gap-3'>
+          <div className='flex flex-col items-center gap-3 md:flex-row'>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant='outline' className='flex-1 w-full'>
@@ -207,7 +209,7 @@ export const RolesTable = () => {
                   <TableHead
                     key={header.id}
                     style={{ width: `${header.getSize()}px` }}
-                    className='relative select-none h-10 bg-sidebar border-y border-border first:border-l first:rounded-l-sm last:border-r last:rounded-r-sm'
+                    className='relative h-10 select-none bg-sidebar border-y border-border first:border-l first:rounded-l-sm last:border-r last:rounded-r-sm'
                   >
                     {header.isPlaceholder ? null : header.column.getCanSort() ? (
                       <div

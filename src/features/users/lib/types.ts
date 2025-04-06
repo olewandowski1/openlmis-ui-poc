@@ -20,8 +20,8 @@ export type UserContactDetailsApiResponse = {
   phoneNumber: string | null;
   allowNotify: boolean;
   emailDetails: {
-    email?: string | undefined;
-    emailVerified?: boolean | undefined;
+    email?: string;
+    emailVerified?: boolean;
   };
 };
 

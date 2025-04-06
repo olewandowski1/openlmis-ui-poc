@@ -34,7 +34,7 @@ export type ComboboxItem = {
  */
 export type PaginatedComboboxProps<TItem extends ComboboxItem> = {
   /** The full list of items to paginate and filter. */
-  items: TItem[];
+  items?: TItem[];
   /** The currently selected item's ID (or '', null, undefined for no selection). */
   value: string | undefined | null;
   /** Function called with the selected item's ID (or '') when the selection changes. */
@@ -73,10 +73,6 @@ export type PaginatedComboboxProps<TItem extends ComboboxItem> = {
 
 const DEFAULT_ITEMS_PER_PAGE = 40;
 
-/**
- * A reusable combobox component with client-side search and pagination,
- * designed to work well with large lists of items.
- */
 export function PaginatedCombobox<TItem extends ComboboxItem>({
   items = [],
   value,
@@ -165,9 +161,9 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
                   : selectText}
           </span>
           {isLoading ? (
-            <Loader2 className='ml-2 h-4 w-4 shrink-0 animate-spin opacity-50' />
+            <Loader2 className='w-4 h-4 ml-2 opacity-50 shrink-0 animate-spin' />
           ) : (
-            <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+            <ChevronsUpDown className='w-4 h-4 ml-2 opacity-50 shrink-0' />
           )}
         </Button>
       </PopoverTrigger>
@@ -187,33 +183,32 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
                 setSearchTerm(e.target.value);
                 setCurrentPage(1);
               }}
-              className='h-7 w-full border-0 bg-transparent px-1 text-sm focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'
+              className='w-full px-1 text-sm bg-transparent border-0 h-7 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0'
               disabled={isLoading || isError}
               aria-label={searchText}
             />
           </div>
           <div className='flex-grow overflow-y-auto max-h-60'>
             {isLoading ? (
-              <div className='py-6 text-center text-sm text-muted-foreground'>
+              <div className='py-6 text-sm text-center text-muted-foreground'>
                 {loadingText}
               </div>
             ) : isError ? (
-              <div className='py-6 text-center text-sm text-destructive'>
+              <div className='py-6 text-sm text-center text-destructive'>
                 {errorText}
               </div>
             ) : currentItems.length === 0 ? (
               searchTerm ? (
-                <div className='py-6 text-center text-sm text-muted-foreground'>
+                <div className='py-6 text-sm text-center text-muted-foreground'>
                   {notFoundText}
                 </div>
               ) : (
-                <div className='py-6 text-center text-sm text-muted-foreground'>
+                <div className='py-6 text-sm text-center text-muted-foreground'>
                   {searchText}
                 </div>
               )
             ) : (
               <div className='py-1'>
-                {/* Map over CURRENT page's items */}
                 {currentItems.map((item) => (
                   <div
                     key={item.id}
@@ -230,11 +225,11 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
                       setOpen(false);
                     }}
                   >
-                    <span className='flex-grow truncate mr-2'>
+                    <span className='flex-grow mr-2 truncate'>
                       {`${item.code ? item.code + ' - ' : ''}${item.name}`}
                     </span>
                     {item.id === effectiveValue && (
-                      <Check className='ml-auto h-4 w-4' />
+                      <Check className='w-4 h-4 ml-auto' />
                     )}
                   </div>
                 ))}
@@ -244,13 +239,13 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
 
           {/* Pagination Controls */}
           {!isLoading && !isError && totalPages > 1 && (
-            <div className='flex-shrink-0 flex items-center justify-between p-2 border-t'>
-              <div className='text-sm text-muted-foreground overflow-hidden text-ellipsis whitespace-nowrap mr-2 min-w-0'>
+            <div className='flex items-center justify-between flex-shrink-0 p-2 border-t'>
+              <div className='min-w-0 mr-2 overflow-hidden text-sm text-muted-foreground text-ellipsis whitespace-nowrap'>
                 {paginationInfoFormat
                   .replace('{currentPage}', currentPage.toString())
                   .replace('{totalPages}', totalPages.toString())}
               </div>
-              <div className='flex gap-1 flex-shrink-0'>
+              <div className='flex flex-shrink-0 gap-1'>
                 <Button
                   variant='outline'
                   size='icon'
@@ -259,7 +254,7 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
                   disabled={currentPage === 1}
                   aria-label={previousPageLabel}
                 >
-                  <ChevronLeft className='h-4 w-4' />
+                  <ChevronLeft className='w-4 h-4' />
                 </Button>
                 <Button
                   variant='outline'
@@ -269,7 +264,7 @@ export function PaginatedCombobox<TItem extends ComboboxItem>({
                   disabled={currentPage === totalPages}
                   aria-label={nextPageLabel}
                 >
-                  <ChevronRight className='h-4 w-4' />
+                  <ChevronRight className='w-4 h-4' />
                 </Button>
               </div>
             </div>

@@ -9,8 +9,8 @@ import { useTranslation } from 'react-i18next';
 import { Typography } from '../ui/typography';
 
 type UserRolesRoleBadgeProps = {
-  roleName: string | undefined;
-  rights: Right[] | undefined;
+  roleName?: string;
+  rights?: Right[];
 };
 
 export const UserRolesRoleBadge: React.FC<UserRolesRoleBadgeProps> = ({
@@ -32,7 +32,7 @@ export const UserRolesRoleBadge: React.FC<UserRolesRoleBadgeProps> = ({
         </Typography.P>
         {rights?.map((right) => (
           <div key={right.id} className='flex items-center gap-1'>
-            <Typography.Small className='font-light text-xs text-primary-foreground'>
+            <Typography.Small className='text-xs font-light text-primary-foreground'>
               {t(`roleRights.${right.name}`)}
             </Typography.Small>
           </div>

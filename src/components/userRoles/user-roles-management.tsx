@@ -26,9 +26,9 @@ type UserRolesManagementProps = {
   onSubmit: (data: BaseUserFormData) => Promise<void> | void;
   isSubmitting: boolean;
   availableRoles: Role[];
-  programs: Program[];
-  supervisoryNodes: SupervisoryNode[];
-  supplyingFacilities: MinimalFacility[];
+  programs?: Program[];
+  supervisoryNodes?: SupervisoryNode[];
+  supplyingFacilities?: MinimalFacility[];
   currentType: RightType;
 };
 
@@ -241,7 +241,7 @@ export const UserRolesManagement: React.FC<UserRolesManagementProps> = ({
         })}
       </Tabs>
       {/* Action Buttons */}
-      <div className='md:col-span-2 flex flex-col gap-2 lg:flex-row-reverse mt-4'>
+      <div className='flex flex-col gap-2 mt-4 md:col-span-2 lg:flex-row-reverse'>
         <Button
           className='w-full'
           disabled={isSubmitting}

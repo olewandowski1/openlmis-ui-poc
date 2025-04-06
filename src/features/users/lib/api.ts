@@ -31,9 +31,7 @@ export const fetchUser = async (userId: string | null) => {
   };
 };
 
-export const fetchUserEmailVerification = async (
-  userId: string | undefined
-) => {
+export const fetchUserEmailVerification = async (userId?: string) => {
   const { data: apiUserVerificationEmail } =
     await axiosInstance.get<UserEmailVerificationApiResponse>(
       `/api/userContactDetails/${userId}/verifications`
