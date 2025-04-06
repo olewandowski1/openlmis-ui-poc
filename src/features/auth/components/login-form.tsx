@@ -11,7 +11,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
 import { Typography } from '@/components/ui/typography';
 import { useAuthActions } from '@/features/auth/hooks/use-auth-actions';
 import { zodResolver } from '@hookform/resolvers/zod';
