@@ -142,7 +142,7 @@ export const UserForm: React.FC<UserFormProps> = ({
         lastName: initialData?.lastName ?? '',
         jobTitle: initialData?.jobTitle ?? '',
         phoneNumber: initialData?.phoneNumber ?? '',
-        enabled: initialData?.enabled ?? true,
+        enabled: initialData?.active ?? true,
         allowNotifications: initialData?.allowNotify ?? false,
         timezone: initialData?.timezone ?? '',
         password: '',
