@@ -19,14 +19,9 @@ import {
 } from '@/components/ui/sidebar';
 import { useAuthActions } from '@/features/auth/hooks/use-auth-actions';
 import { useLoggedUser } from '@/features/users/hooks/use-user';
-import { useNavigate } from '@tanstack/react-router';
-import {
-  ChevronsUpDown,
-  LogOut,
-  Settings,
-  ShieldCheck,
-  UserRound,
-} from 'lucide-react';
+import { ALL_RIGHT_TYPES } from '@/lib/constants';
+import { Link, useNavigate } from '@tanstack/react-router';
+import { ChevronsUpDown, LogOut, ShieldCheck, UserRound } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -50,6 +45,10 @@ export const UserWidget = () => {
     await logout();
     navigate({ to: '/login' });
   };
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <SidebarMenu>
@@ -109,13 +108,16 @@ export const UserWidget = () => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <ShieldCheck size={16} strokeWidth={2} aria-hidden='true' />
-                <span>{t('roles')}</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Settings size={16} strokeWidth={2} aria-hidden='true' />
-                <span>{t('settings')}</span>
+              <DropdownMenuItem asChild>
+                <Link
+                  to='/users/$userId/roles'
+                  params={{ userId: user?.id }}
+                  // Default to the SUPERVISION tab
+                  search={{ type: ALL_RIGHT_TYPES[0] }}
+                >
+                  <ShieldCheck size={16} strokeWidth={2} aria-hidden='true' />
+                  <span>{t('roles')}</span>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

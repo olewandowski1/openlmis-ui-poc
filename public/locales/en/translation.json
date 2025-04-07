@@ -424,7 +424,8 @@
             "mustHaveARight": "Role must have at least one right."
           }
         }
-      }
+      },
+      "noRightTypes": "No right types available."
     },
     "NotFoundPage": {
       "title": "Page not found",

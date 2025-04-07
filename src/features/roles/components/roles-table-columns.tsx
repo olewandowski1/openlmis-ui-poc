@@ -70,6 +70,15 @@ export const useCreateColumns = (): ColumnDef<Role>[] => {
         </span>
       ),
       size: 120,
+      sortingFn: (rowA, rowB) => {
+        const typeA = rowA.original.rights[0].type;
+        const typeB = rowB.original.rights[0].type;
+
+        if (typeA === typeB) {
+          return 0;
+        }
+        return typeA < typeB ? -1 : 1;
+      }
     },
     {
       accessorKey: 'description',

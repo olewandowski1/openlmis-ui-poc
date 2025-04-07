@@ -412,7 +412,8 @@
             "mustHaveARight": "A função deve ter pelo menos um direito associado."
           }
         }
-      }
+      },
+      "noRightTypes": "Nenhum tipo de direito disponível para este tipo de função."
     },
     "NotFoundPage": {
       "title": "Página não encontrada",

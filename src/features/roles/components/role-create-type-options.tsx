@@ -30,6 +30,16 @@ export const RoleCreateTypeOptions = () => {
     return <RoleCreateTypeSkeleton />;
   }
 
+  if (!uniqueRightTypeData || uniqueRightTypeData.length === 0) {
+    return (
+      <div className='flex w-full items-center justify-center'>
+        <Typography.P className='text-muted-foreground'>
+          {t('noRightTypes')}
+        </Typography.P>
+      </div>
+    );
+  }
+
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
       {uniqueRightTypeData.map((type) => {

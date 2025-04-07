@@ -53,7 +53,7 @@ function EditRolePage() {
       if (axiosError.status === 400 && axiosResponseData?.messageKey) {
         toast.error(t(axiosResponseData.messageKey));
       } else {
-        toast.error(t('updateUserError'));
+        toast.error(t('updateRoleError'));
       }
     },
   });

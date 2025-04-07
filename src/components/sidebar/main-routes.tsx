@@ -19,7 +19,7 @@ const SAMPLE_ROUTES = [
     key: 'notifications',
     href: '/notifications',
     icon: Bell,
-    isActive: true,
+    isActive: false,
   },
 ];
 
@@ -41,6 +41,7 @@ export const MainRoutes = () => {
             className={cn('', {
               'bg-sidebar-accent': pathname === route.href,
             })}
+            disabled={!route.isActive}
           >
             <Link to={route.href}>
               <route.icon />
