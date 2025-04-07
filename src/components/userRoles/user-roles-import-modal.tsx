@@ -1,7 +1,4 @@
-import {
-  ComboboxItem,
-  PaginatedCombobox,
-} from '@/components/paginated-combobox';
+import { PaginatedCombobox } from '@/components/paginated-combobox';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -91,10 +88,10 @@ export const UserRolesImportModal = () => {
   } = useUser(selectedUserId);
 
   // Map the users to the format required by the Combobox
-  const mappedUsers = users.map((user: User) => ({
+  const mappedUsers = users?.map((user: User) => ({
     id: user.id,
     name: user.username,
-  })) as ComboboxItem[];
+  }));
 
   const mutation = useMutation({
     mutationFn: (updatedData: BaseUserFormData) =>

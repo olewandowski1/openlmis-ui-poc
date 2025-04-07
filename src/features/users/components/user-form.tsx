@@ -161,7 +161,7 @@ export const UserForm: React.FC<UserFormProps> = ({
   } = useMinimalFacilities();
 
   const { userEmailVerification, isLoading: isEmailVerificationLoading } =
-    useUserEmailVerification(initialData?.id, mode);
+    useUserEmailVerification(mode, initialData?.id);
 
   const allowNotificationsId = useId();
   const allowNotificationsDescId = `${allowNotificationsId}-description`;
